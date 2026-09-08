@@ -1,5 +1,6 @@
 ﻿import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://nexsyspersia.ir',
+  site: 'https://saalsfwa.github.io',
+  base: '/nexsyspersia/',
 });
