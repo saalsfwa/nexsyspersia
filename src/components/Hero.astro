@@ -1,0 +1,42 @@
+﻿---
+interface Props { lang?: 'fa' | 'en'; }
+const { lang = 'fa' } = Astro.props;
+const isFa = lang === 'fa';
+const t = {
+  fa: {
+    badge: 'راهکارهای یکپارچه فناوری',
+    title1: 'آینده‌ی دیجیتال',
+    title2: 'سازمان شما',
+    desc: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت سایبری، هوشمندسازی ساختمان، اتوماسیون صنعتی و هوش مصنوعی برای سازمان‌ها و صنایع.',
+    cta1: 'مشاهده خدمات',
+    cta2: 'تماس با ما'
+  },
+  en: {
+    badge: 'Integrated Technology Solutions',
+    title1: 'The Digital Future',
+    title2: 'of Your Organization',
+    desc: 'Provider of integrated IT, cybersecurity, smart building, industrial automation, and AI solutions for enterprises and industries.',
+    cta1: 'Explore Services',
+    cta2: 'Contact Us'
+  }
+}[isFa ? 'fa' : 'en'];
+---
+<section class="hero">
+  <div class="container hero-content fade-up">
+    <div class="hero-badge">{t.badge}</div>
+    <h1>
+      {t.title1}<br/>
+      <span class="gradient-text">{t.title2}</span>
+    </h1>
+    <p>{t.desc}</p>
+    <div class="hero-buttons">
+      <a href="#services" class="btn btn-primary">
+        {t.cta1}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          {isFa ? '<><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>' : '<><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>'}
+        </svg>
+      </a>
+      <a href="#contact" class="btn btn-outline">{t.cta2}</a>
+    </div>
+  </div>
+</section>

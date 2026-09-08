@@ -1,0 +1,46 @@
+﻿---
+interface Props { lang?: 'fa' | 'en'; }
+const { lang = 'fa' } = Astro.props;
+const isFa = lang === 'fa';
+const t = {
+  fa: {
+    about: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت، هوشمندسازی و هوش مصنوعی.',
+    services: 'خدمات', company: 'شرکت',
+    aboutUs: 'درباره ما', contact: 'تماس',
+    rights: '© ۲۰۲۶ نکس‌سیس پرشیا. تمامی حقوق محفوظ است.'
+  },
+  en: {
+    about: 'Provider of integrated IT, security, smart building, and AI solutions.',
+    services: 'Services', company: 'Company',
+    aboutUs: 'About Us', contact: 'Contact',
+    rights: '© 2026 Nexsys Persia. All rights reserved.'
+  }
+}[isFa ? 'fa' : 'en'];
+const services = isFa
+  ? ['زیرساخت IT', 'امنیت سایبری', 'CCTV و نظارت', 'هوشمندسازی', 'اتوماسیون صنعتی', 'هوش مصنوعی']
+  : ['IT Infrastructure', 'Cybersecurity', 'CCTV & Surveillance', 'Smart Building', 'Industrial Automation', 'Artificial Intelligence'];
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="logo" style="color: white;">nexsys<span>persia</span></div>
+        <p>{t.about}</p>
+      </div>
+      <div>
+        <h4>{t.services}</h4>
+        <ul class="footer-links">
+          {services.slice(0, 5).map(s => <li><a href="#services">{s}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>{t.company}</h4>
+        <ul class="footer-links">
+          <li><a href="#about">{t.aboutUs}</a></li>
+          <li><a href="#contact">{t.contact}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">{t.rights}</div>
+  </div>
+</footer>

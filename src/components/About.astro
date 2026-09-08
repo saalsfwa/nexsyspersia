@@ -1,0 +1,51 @@
+﻿---
+interface Props { lang?: 'fa' | 'en'; }
+const { lang = 'fa' } = Astro.props;
+const isFa = lang === 'fa';
+const t = {
+  fa: {
+    title: 'درباره‌ی نکس‌سیس پرشیا',
+    subtitle: 'شریک فناوری قابل اعتماد شما',
+    p1: 'نکس‌سیس پرشیا یک شرکت پیشرو در ارائه‌ی راهکارهای جامع فناوری اطلاعات، امنیت سایبری و سیستم‌های هوشمند است. ما با تکیه بر تیمی متخصص و تجربه‌ی گسترده، نیازهای دیجیتال سازمان‌ها، صنایع و ساختمان‌های مدرن را برآورده می‌کنیم.',
+    p2: 'از طراحی زیرساخت‌های شبکه و دیتاسنتر تا پیاده‌سازی سیستم‌های هوش مصنوعی و اتوماسیون صنعتی، ما در کنار شما هستیم تا تحول دیجیتال کسب‌وکار شما را محقق سازیم.',
+    stats: [
+      { num: '+۰', label: 'پروژه موفق' },
+      { num: '+۲۰', label: 'مشتری سازمانی' },
+      { num: '۲۴/۷', label: 'پشتیبانی' },
+      { num: '۱۰۰٪', label: 'تعهد کیفیت' }
+    ]
+  },
+  en: {
+    title: 'About Nexsys Persia',
+    subtitle: 'Your Trusted Technology Partner',
+    p1: 'Nexsys Persia is a leading company in providing comprehensive IT, cybersecurity, and smart systems solutions. With a specialized team and extensive experience, we meet the digital needs of organizations, industries, and modern buildings.',
+    p2: 'From designing network infrastructure and data centers to implementing AI systems and industrial automation, we are with you to realize the digital transformation of your business.',
+    stats: [
+      { num: '+50', label: 'Successful Projects' },
+      { num: '+20', label: 'Enterprise Clients' },
+      { num: '24/7', label: 'Support' },
+      { num: '100%', label: 'Quality Commitment' }
+    ]
+  }
+}[isFa ? 'fa' : 'en'];
+---
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">{t.title}</h2>
+        <p class="section-subtitle">{t.subtitle}</p>
+        <p>{t.p1}</p>
+        <p>{t.p2}</p>
+      </div>
+      <div class="stats">
+        {t.stats.map(s => (
+          <div class="stat">
+            <div class="stat-number">{s.num}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

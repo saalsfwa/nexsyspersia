@@ -1,0 +1,44 @@
+﻿---
+interface Props { lang?: 'fa' | 'en'; }
+const { lang = 'fa' } = Astro.props;
+const isFa = lang === 'fa';
+const items = {
+  fa: [
+    { icon: 'target', title: 'راهکار یکپارچه', desc: 'تمام نیازهای IT، امنیت، هوشمندسازی و نرم‌افزار را از یک تیم واحد دریافت کنید.' },
+    { icon: 'award', title: 'تیم متخصص', desc: 'مهندسان با تجربه در حوزه‌های شبکه، امنیت، AI و اتوماسیون صنعتی.' },
+    { icon: 'clock', title: 'پشتیبانی ۲۴/', desc: 'تیم پشتیبانی ما در تمام ساعات شبانه‌روز در کنار شماست.' },
+    { icon: 'zap', title: 'تکنولوژی روز', desc: 'استفاده از جدیدترین فناوری‌ها و استانداردهای جهانی.' }
+  ],
+  en: [
+    { icon: 'target', title: 'Integrated Solutions', desc: 'Get all your IT, security, smart building, and software needs from a single team.' },
+    { icon: 'award', title: 'Expert Team', desc: 'Experienced engineers in networking, security, AI, and industrial automation.' },
+    { icon: 'clock', title: '24/7 Support', desc: 'Our support team is with you around the clock.' },
+    { icon: 'zap', title: 'Modern Technology', desc: 'Using the latest technologies and global standards.' }
+  ]
+}[isFa ? 'fa' : 'en'];
+const icons = {
+  target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  award: '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'
+};
+---
+<section class="section why-us" id="why">
+  <div class="container">
+    <h2 class="section-title">
+      {isFa ? 'چرا ' : 'Why '}<span class="gradient-text">{isFa ? 'نکس‌سیس پرشیا؟' : 'Nexsys Persia?'}</span>
+    </h2>
+    <p class="section-subtitle">
+      {isFa ? 'دلایلی که ما را به انتخاب اول سازمان‌ها تبدیل می‌کند' : 'Reasons why we are the first choice for organizations'}
+    </p>
+    <div class="why-grid">
+      {items.map(i => (
+        <div class="why-item">
+          <svg class="why-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i.icon]} />
+          <h3>{i.title}</h3>
+          <p>{i.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

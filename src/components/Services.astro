@@ -1,0 +1,58 @@
+﻿---
+interface Props { lang?: 'fa' | 'en'; }
+const { lang = 'fa' } = Astro.props;
+const isFa = lang === 'fa';
+const services = {
+  fa: [
+    { icon: 'server', title: 'IT و زیرساخت دیجیتال', desc: 'طراحی شبکه، سرور، دیتاسنتر، Cloud، مجازی‌سازی و پشتیبانی زیرساخت‌های فناوری اطلاعات.' },
+    { icon: 'shield', title: 'امنیت سایبری', desc: 'Firewall، امنیت شبکه، EDR/XDR، SIEM، ارزیابی آسیب‌پذیری و محافظت کامل از دارایی‌های دیجیتال.' },
+    { icon: 'camera', title: 'نظارت تصویری و CCTV', desc: 'دوربین‌های IP، آنالیز ویدیویی مبتنی بر AI، پلاک‌خوان، تشخیص چهره و اتاق مانیتورینگ.' },
+    { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'Smart Home، BMS، کنترل روشنایی، HVAC، مدیریت انرژی و یکپارچه‌سازی سیستم‌ها.' },
+    { icon: 'factory', title: 'اتوماسیون صنعتی', desc: 'Industrial IT، شبکه‌ی صنعتی، SCADA، PLC، IIoT و امنیت شبکه‌های OT.' },
+    { icon: 'cpu', title: 'هوش مصنوعی و AI', desc: 'Video Analytics، Chatbot سازمانی، Predictive Maintenance و Computer Vision صنعتی.' },
+    { icon: 'code', title: 'توسعه نرم‌افزار', desc: 'طراحی وب‌سایت، Web App، اپلیکیشن موبایل، CRM/ERP و داشبوردهای BI.' },
+    { icon: 'fire', title: 'ایمنی و اعلام حریق', desc: 'سیستم‌های اعلام و اطفای حریق، PA، کنترل تردد و سیستم‌های حفاظتی.' }
+  ],
+  en: [
+    { icon: 'server', title: 'IT & Digital Infrastructure', desc: 'Network design, servers, data centers, Cloud, virtualization, and IT infrastructure support.' },
+    { icon: 'shield', title: 'Cybersecurity', desc: 'Firewall, network security, EDR/XDR, SIEM, vulnerability assessment, and full digital asset protection.' },
+    { icon: 'camera', title: 'Video Surveillance & CCTV', desc: 'IP cameras, AI-based video analytics, LPR, face recognition, and monitoring rooms.' },
+    { icon: 'home', title: 'Smart Building', desc: 'Smart Home, BMS, lighting control, HVAC, energy management, and system integration.' },
+    { icon: 'factory', title: 'Industrial Automation', desc: 'Industrial IT, industrial networking, SCADA, PLC, IIoT, and OT network security.' },
+    { icon: 'cpu', title: 'Artificial Intelligence', desc: 'Video Analytics, enterprise Chatbot, Predictive Maintenance, and industrial Computer Vision.' },
+    { icon: 'code', title: 'Software Development', desc: 'Website design, Web Apps, mobile apps, CRM/ERP, and BI dashboards.' },
+    { icon: 'fire', title: 'Safety & Fire Alarm', desc: 'Fire alarm and suppression systems, PA, access control, and security systems.' }
+  ]
+}[isFa ? 'fa' : 'en'];
+const icons = {
+  server: '<rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><line x1="6" y1="6.5" x2="6.01" y2="6.5"/><line x1="6" y1="17.5" x2="6.01" y2="17.5"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  camera: '<path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>',
+  home: '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  factory: '<path d="M2 20h20M4 20V8l6 4V8l6 4V4h4v16"/>',
+  cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>',
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  fire: '<path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/>'
+};
+---
+<section class="section" id="services">
+  <div class="container">
+    <h2 class="section-title">
+      {isFa ? 'خدمات ' : 'Our '}<span class="gradient-text">{isFa ? 'ما' : 'Services'}</span>
+    </h2>
+    <p class="section-subtitle">
+      {isFa ? 'راهکارهای جامع فناوری برای تمام نیازهای دیجیتال سازمان شما' : 'Comprehensive technology solutions for all your organization digital needs'}
+    </p>
+    <div class="services-grid">
+      {services.map(s => (
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons[s.icon]} />
+          </div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
