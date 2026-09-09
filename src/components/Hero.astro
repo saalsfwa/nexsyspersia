@@ -4,39 +4,110 @@ const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 const t = {
   fa: {
-    badge: 'راهکارهای یکپارچه فناوری',
+    badge: 'پیشرو در فناوری‌های نوین',
     title1: 'آینده‌ی دیجیتال',
-    title2: ' تکنولوژی برای همه ',
-    desc: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت سایبری، هوشمندسازی ساختمان، اتوماسیون صنعتی و هوش مصنوعی.',
+    title2: 'را می‌سازیم',
+    desc: 'نکس‌سیس پرشیا، ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت سایبری، هوشمندسازی ساختمان، اتوماسیون صنعتی و هوش مصنوعی برای سازمان‌های پیشرو.',
     cta1: 'مشاهده خدمات',
-    cta2: 'مشاوره رایگان کلیک کنید  '
+    cta2: 'درخواست مشاوره'
   },
   en: {
-    badge: 'Integrated Technology Solutions',
-    title1: 'The Digital Future',
-    title2: 'of Your Organization',
-    desc: 'Provider of integrated IT, cybersecurity, smart building, industrial automation, and AI solutions for enterprises and industries.',
+    badge: 'Leading in Modern Technologies',
+    title1: 'Building the Digital',
+    title2: 'Future',
+    desc: 'Nexsys Persia provides integrated IT, cybersecurity, smart building, industrial automation, and AI solutions for forward-thinking organizations.',
     cta1: 'Explore Services',
-    cta2: 'Contact Us'
+    cta2: 'Get Consultation'
   }
 }[isFa ? 'fa' : 'en'];
+
+// تصاویر اسلایدشو - بعداً لینک‌های خودتان را جایگزین کنید
+const slides = [
+  'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=800&fit=crop',
+  'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=800&fit=crop'
+];
 ---
+
 <section class="hero">
-  <div class="container hero-content fade-up">
-    <div class="hero-badge">{t.badge}</div>
-    <h1>
-      {t.title1}<br/>
-      <span class="gradient-text">{t.title2}</span>
-    </h1>
-    <p>{t.desc}</p>
-    <div class="hero-buttons">
-      <a href="#services" class="btn btn-primary">
-        {t.cta1}
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          {isFa ? '<><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>' : '<><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>'}
-        </svg>
-      </a>
-      <a href="#contact" class="btn btn-outline">{t.cta2}</a>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text fade-up">
+        <div class="hero-badge">{t.badge}</div>
+        <h1>
+          {t.title1}<br/>
+          <span class="gradient-text">{t.title2}</span>
+        </h1>
+        <p>{t.desc}</p>
+        <div class="hero-buttons">
+          <a href="#services" class="btn btn-primary">
+            {t.cta1}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              {isFa ? '<><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>' : '<><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>'}
+            </svg>
+          </a>
+          <a href="#contact" class="btn btn-outline">{t.cta2}</a>
+        </div>
+      </div>
+      
+      <div class="hero-slider fade-up">
+        <div class="slider-container">
+          {slides.map((src, i) => (
+            <div class={`slide ${i === 0 ? 'active' : ''}`}>
+              <img src={src} alt={`Slide ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} />
+            </div>
+          ))}
+          <div class="slider-dots">
+            {slides.map((_, i) => (
+              <span class={`dot ${i === 0 ? 'active' : ''}`} data-index={i}></span>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const container = document.querySelector('.slider-container');
+  if (!container) {
+    // اگر container پیدا نشد (صفحه انگلیسی)، دوباره جستجو کن
+    const allContainers = document.querySelectorAll('.slider-container');
+    allContainers.forEach(initSlider);
+  } else {
+    initSlider(container);
+  }
+  
+  function initSlider(container) {
+    const slides = container.querySelectorAll('.slide');
+    const dots = container.querySelectorAll('.dot');
+    if (slides.length === 0) return;
+    
+    let currentIndex = 0;
+    
+    function goToSlide(index) {
+      slides[currentIndex].classList.remove('active');
+      dots[currentIndex].classList.remove('active');
+      currentIndex = index;
+      slides[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+    }
+    
+    function nextSlide() {
+      const next = (currentIndex + 1) % slides.length;
+      goToSlide(next);
+    }
+    
+    // تعویض خودکار هر 5 ثانیه
+    const interval = setInterval(nextSlide, 5000);
+    
+    // کلیک روی dots
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(interval);
+        goToSlide(i);
+        // ری‌استارت تایمر
+        setInterval(nextSlide, 5000);
+      });
+    });
+  }
+</script>
