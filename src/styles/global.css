@@ -1,5 +1,19 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+/* Neural Network Background */
+#neural-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
+body::before,
+body::after {
+  display: none;
+}
 :root {
   --color-bg: #0A0E27;
   --color-bg-alt: #0F1438;
