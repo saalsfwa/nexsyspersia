@@ -2,30 +2,30 @@
 interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
-const langPath = isFa ? '/nexsyspersia/en/' : '/nexsyspersia/';
+const langPath = isFa ? '/en/' : '/';
 const langLabel = isFa ? 'EN' : 'فا';
 const t = {
-  fa: { services: 'خدمات', about: 'درباره ما', why: 'چرا ما', contact: 'تماس' },
-  en: { services: 'Services', about: 'About', why: 'Why Us', contact: 'Contact' }
+  fa: { services: 'خدمات', about: 'درباره ما', projects: 'پروژه‌ها', blog: 'بلاگ', contact: 'تماس' },
+  en: { services: 'Services', about: 'About', projects: 'Projects', blog: 'Blog', contact: 'Contact' }
 }[isFa ? 'fa' : 'en'];
 ---
 <nav class="navbar">
   <div class="nav-inner">
-    <a href={isFa ? '/nexsyspersia/' : '/nexsyspersia/en/'} class="logo">
+    <a href={isFa ? '/' : '/'} class="logo">
+      <div class="logo-icon">N</div>
       nexsys<span>persia</span>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services">{t.services}</a></li>
       <li><a href="#about">{t.about}</a></li>
-      <li><a href="#why">{t.why}</a></li>
+      <li><a href="#projects">{t.projects}</a></li>
+      <li><a href="#blog">{t.blog}</a></li>
       <li><a href="#contact">{t.contact}</a></li>
       <li><a href={langPath} class="lang-switch">{langLabel}</a></li>
     </ul>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
   </div>
