@@ -6,20 +6,34 @@ const t = {
   fa: {
     title: 'تماس با ما',
     subtitle: 'آماده‌ی شروع پروژه‌ی بعدی شما هستیم',
-    desc: 'برای دریافت مشاوره‌ی رایگان و بررسی نیازهای سازمان خود، با ما در تماس باشید.',
-    address: 'آدرس', addressVal: 'ایران، تهران',
-    phone: 'تلفن', email: 'ایمیل',
-    name: 'نام و نام خانوادگی', emailLabel: 'ایمیل',
-    subject: 'موضوع', message: 'پیام شما', send: 'ارسال پیام'
+    desc: 'برای دریافت مشاوره‌ی رایگان و بررسی نیازهای سازمان خود، با ما در تماس باشید. تیم متخصص ما در اسرع وقت پاسخگوی شما خواهد بود.',
+    address: 'آدرس دفتر مرکزی', 
+    addressVal: 'اهواز، کیان‌آباد، بین ۱۴ و ۱۵ غربی، مجتمع هشت بهشت، طبقه سوم',
+    phone: 'تلفن تماس', 
+    phoneVal: '۹۱۶۱۱۴۰۶۱۲',
+    email: 'ایمیل', 
+    emailVal: 'info@nexsyspersia.ir',
+    name: 'نام و نام خانوادگی', 
+    emailLabel: 'ایمیل',
+    subject: 'موضوع', 
+    message: 'پیام شما', 
+    send: 'ارسال پیام'
   },
   en: {
     title: 'Contact Us',
     subtitle: 'Ready to start your next project',
-    desc: 'Contact us for a free consultation and to assess your organization needs.',
-    address: 'Address', addressVal: 'Tehran, Iran',
-    phone: 'Phone', email: 'Email',
-    name: 'Full Name', emailLabel: 'Email',
-    subject: 'Subject', message: 'Your Message', send: 'Send Message'
+    desc: 'Contact us for a free consultation and to assess your organization needs. Our expert team will respond as soon as possible.',
+    address: 'Head Office', 
+    addressVal: 'Ahvaz, Kianabad, Between 14th and 15th West, Hasht Behesht Complex, 3rd Floor',
+    phone: 'Phone', 
+    phoneVal: '+98 916 114 0612',
+    email: 'Email', 
+    emailVal: 'info@nexsyspersia.ir',
+    name: 'Full Name', 
+    emailLabel: 'Email',
+    subject: 'Subject', 
+    message: 'Your Message', 
+    send: 'Send Message'
   }
 }[isFa ? 'fa' : 'en'];
 const icons = {
@@ -37,21 +51,38 @@ const icons = {
         <h3>{t.desc}</h3>
         <div class="contact-item">
           <div class="contact-item-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons.map} />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons.map} />
           </div>
           <div class="contact-item-text"><strong>{t.address}</strong><span>{t.addressVal}</span></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons.phone} />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons.phone} />
           </div>
-          <div class="contact-item-text"><strong>{t.phone}</strong><span dir="ltr">+98 21 0000 0000</span></div>
+          <div class="contact-item-text"><strong>{t.phone}</strong><span dir="ltr">{t.phoneVal}</span></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons.mail} />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons.mail} />
           </div>
-          <div class="contact-item-text"><strong>{t.email}</strong><span>info@nexsyspersia.ir</span></div>
+          <div class="contact-item-text"><strong>{t.email}</strong><span>{t.emailVal}</span></div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Telegram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          </a>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3425.1234567890123!2d48.66912345678901!3d31.312345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDE4JzQ0LjQiTiA0OMKwNDAnMDguOCJF!5e0!3m2!1sen!2sir!4v1234567890123" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
       <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
