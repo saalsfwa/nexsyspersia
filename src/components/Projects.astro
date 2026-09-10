@@ -3,7 +3,7 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
-// ۱ لینک تصویر پروژه‌های شما
+// 12 لینک تصویر پروژه‌های شما
 const projects = [
   'https://s100.picofile.com/d/Dk3HXeHcN7PY7YTcpFcQ1PZqeLusDiGCenJ42VE2Hq05B3jOJCbhuyGn61z-j-szaWCcjmRJBHyIldTJMIC2GuFe/Picture15.webp',
   'https://s100.picofile.com/d/AO7FvFstEIu89i_pGaa2XfC2095anvJT3Zg_oFzGMvYK_v5I8vqHqT1yErCkkvcvgr5c2qhn_uoNMap7sP-1utyb/Picture10.webp',
@@ -31,7 +31,6 @@ const projects = [
     
     <div class="slider-container">
       <div class="slider-track" id="proj-track">
-        {/* تکرار لیست برای ایجاد حلقه بی‌پایان */}
         {[...projects, ...projects].map(src => (
           <div class="project-item"><img src={src} alt="Project" loading="lazy" /></div>
         ))}
@@ -48,10 +47,10 @@ const projects = [
     mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
     -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
   }
+  /* حذف transition برای جلوگیری از هرگونه حرکت */
   .slider-track { 
     display: flex; 
     gap: 24px; 
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
     will-change: transform; 
   }
   
@@ -90,10 +89,11 @@ const projects = [
       if (currentIndex > maxIndex) currentIndex = 0;
       
       const itemWidth = track.firstElementChild!.offsetWidth + 24; // عرض آیتم + فاصله
+      // تغییر ناگهانی بدون انیمیشن
       track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
     }
 
-    // شروع اسلایدشو خودکار هر ۵ ثانیه
+    // شروع تعویض خودکار هر ۵ ثانیه
     setInterval(goToNext, 5000);
   }
 </script>
