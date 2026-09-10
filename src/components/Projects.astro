@@ -1,4 +1,3 @@
-```astro
 ---
 interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
@@ -17,7 +16,6 @@ const projects = [
 
 <section class="section projects-section" id="projects">
   <div class="container">
-
     <h2 class="section-title" style="text-align: center;">
       {isFa ? 'نمونه‌کارهای ' : 'Featured '}
       <span class="gradient-text">
@@ -33,49 +31,31 @@ const projects = [
 
     <div class="slider-wrapper">
 
-      <button
-        class="slider-btn prev"
-        aria-label={isFa ? 'قبلی' : 'Previous'}
-        type="button"
-      >
+      <button class="slider-btn prev" aria-label="Previous">
         &#10094;
       </button>
 
       <div class="marquee-container">
-
         <div class="marquee-content">
 
-          <!-- سری اول -->
+          <!-- مجموعه اول -->
           {projects.map(src => (
             <div class="project-item">
-              <img
-                src={src}
-                alt={isFa ? 'نمونه‌کار' : 'Project'}
-                loading="lazy"
-              />
+              <img src={src} alt="Project" loading="lazy" />
             </div>
           ))}
 
-          <!-- سری دوم برای Loop بی‌نهایت -->
+          <!-- مجموعه دوم برای حرکت بی‌نهایت -->
           {projects.map(src => (
             <div class="project-item">
-              <img
-                src={src}
-                alt={isFa ? 'نمونه‌کار' : 'Project'}
-                loading="lazy"
-              />
+              <img src={src} alt="Project" loading="lazy" />
             </div>
           ))}
 
         </div>
-
       </div>
 
-      <button
-        class="slider-btn next"
-        aria-label={isFa ? 'بعدی' : 'Next'}
-        type="button"
-      >
+      <button class="slider-btn next" aria-label="Next">
         &#10095;
       </button>
 
@@ -94,7 +74,6 @@ const projects = [
     align-items: center;
     gap: 20px;
     position: relative;
-    width: 100%;
   }
 
   .marquee-container {
@@ -118,21 +97,13 @@ const projects = [
     );
   }
 
-  /*
-   * مهم:
-   * خود Track همیشه LTR است.
-   * بنابراین RTL صفحه روی ترتیب عکس‌ها
-   * تأثیر نمی‌گذارد.
-   */
   .marquee-content {
     display: flex;
-    flex-direction: row;
-    direction: ltr;
-
     gap: 24px;
     width: max-content;
 
-    transform: translate3d(0, 0, 0);
+    /* مقدار اولیه توسط JS تنظیم می‌شود */
+    transform: translateX(0);
 
     will-change: transform;
   }
@@ -146,7 +117,7 @@ const projects = [
 
     border: 1px solid var(--color-border);
 
-    flex: 0 0 160px;
+    flex-shrink: 0;
 
     transition:
       transform 0.3s ease,
@@ -193,11 +164,7 @@ const projects = [
 
     font-size: 1.2rem;
 
-    transition:
-      background 0.3s ease,
-      color 0.3s ease,
-      border-color 0.3s ease,
-      transform 0.15s ease;
+    transition: all 0.3s ease;
 
     flex-shrink: 0;
 
@@ -215,11 +182,6 @@ const projects = [
   }
 
   @media (max-width: 768px) {
-
-    .projects-section {
-      padding: 60px 0;
-    }
-
     .slider-wrapper {
       gap: 10px;
     }
@@ -233,7 +195,6 @@ const projects = [
     .project-item {
       width: 120px;
       height: 120px;
-      flex-basis: 120px;
     }
 
     .marquee-content {
@@ -246,147 +207,82 @@ const projects = [
   const section = document.getElementById('projects');
 
   if (section) {
+    const container = section.querySelector('.marquee-container');
+    const track = section.querySelector('.marquee-content');
+    const prevBtn = section.querySelector('.prev');
+    const nextBtn = section.querySelector('.next');
 
-    const container =
-      section.querySelector('.marquee-container');
+    if (container && track && prevBtn && nextBtn) {
 
-    const track =
-      section.querySelector('.marquee-content');
-
-    const prevBtn =
-      section.querySelector('.prev');
-
-    const nextBtn =
-      section.querySelector('.next');
-
-    if (
-      container &&
-      track &&
-      prevBtn &&
-      nextBtn
-    ) {
-
-      /*
-       * تشخیص زبان صفحه
-       */
-      const isRTL =
-        document.documentElement.dir === 'rtl' ||
-        document.documentElement.lang === 'fa' ||
-        document.documentElement.lang?.startsWith('fa');
-
-      /*
-       * موقعیت فعلی Track
-       */
       let currentX = 0;
-
-      /*
-       * زمان آخرین Frame
-       */
       let lastTime = performance.now();
 
-      /*
-       * وضعیت توقف
-       */
       let isPaused = false;
 
       /*
        * سرعت حرکت خودکار
-       *
-       * عدد بیشتر = سریع‌تر
        * عدد کمتر = آرام‌تر
+       * عدد بیشتر = سریع‌تر
        */
       const autoSpeed = 35;
 
       /*
-       * گرفتن عرض یک آیتم به همراه Gap
+       * فاصله هر عکس
+       * width + gap
        */
       function getItemWidth() {
+        const firstItem = track.querySelector('.project-item');
 
-        const firstItem =
-          track.querySelector('.project-item');
+        if (!firstItem) return 184;
 
-        if (!firstItem) {
-          return 184;
-        }
+        const itemWidth = firstItem.getBoundingClientRect().width;
 
-        const itemWidth =
-          firstItem.getBoundingClientRect().width;
-
-        const styles =
-          window.getComputedStyle(track);
-
-        const gap =
-          parseFloat(
-            styles.columnGap ||
-            styles.gap ||
-            '0'
-          );
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || '0');
 
         return itemWidth + gap;
       }
 
       /*
-       * عرض یک مجموعه کامل از تصاویر
-       *
        * چون دو مجموعه کاملاً یکسان داریم،
-       * نصف Track برابر با یک Loop کامل است.
+       * عرض نصف Track مرز Loop ماست.
        */
       function getLoopWidth() {
-
         return track.scrollWidth / 2;
       }
 
       /*
-       * تنظیم موقعیت اولیه
+       * موقعیت اولیه:
        *
-       * از همان ابتدا سری دوم تصاویر
-       * نمایش داده می‌شود.
+       * مجموعه دوم را نشان می‌دهیم.
        *
-       * بنابراین صفحه خالی شروع نمی‌شود.
+       * بنابراین همان لحظه اول ردیف پر است
+       * و عکس‌ها منتظر نمی‌مانند که از سمت چپ وارد شوند.
        */
       function setInitialPosition() {
-
-        const loopWidth =
-          getLoopWidth();
-
-        if (!loopWidth) {
-          return;
-        }
+        const loopWidth = getLoopWidth();
 
         currentX = -loopWidth;
 
-        track.style.transition = 'none';
-
-        track.style.transform =
-          `translate3d(${currentX}px, 0, 0)`;
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
       }
 
       /*
-       * جلوگیری از خروج Track از محدوده
+       * Loop بی‌نهایت
        *
-       * این قسمت Loop بی‌نهایت را ایجاد می‌کند.
+       * وقتی از یک مجموعه عبور کردیم،
+       * بدون اینکه کاربر متوجه شود به مجموعه مشابه
+       * منتقل می‌شویم.
        */
       function normalizePosition() {
+        const loopWidth = getLoopWidth();
 
-        const loopWidth =
-          getLoopWidth();
+        if (!loopWidth) return;
 
-        if (!loopWidth) {
-          return;
-        }
-
-        /*
-         * اگر به انتهای سمت چپ رسیدیم،
-         * یک مجموعه به جلو برمی‌گردیم.
-         */
         while (currentX <= -loopWidth) {
           currentX += loopWidth;
         }
 
-        /*
-         * اگر به سمت راست بیش از حد رفتیم،
-         * یک مجموعه به عقب می‌رویم.
-         */
         while (currentX >= 0) {
           currentX -= loopWidth;
         }
@@ -396,35 +292,16 @@ const projects = [
        * حرکت خودکار
        */
       function animate(time) {
-
-        const delta =
-          Math.min(
-            time - lastTime,
-            50
-          );
+        const delta = Math.min(time - lastTime, 50);
 
         lastTime = time;
 
         if (!isPaused) {
 
           /*
-           * فارسی:
-           * حرکت راست به چپ
+           * حرکت به سمت راست
            */
-          if (isRTL) {
-
-            currentX -=
-              (autoSpeed * delta) / 1000;
-
-          /*
-           * انگلیسی:
-           * حرکت چپ به راست
-           */
-          } else {
-
-            currentX +=
-              (autoSpeed * delta) / 1000;
-          }
+          currentX += (autoSpeed * delta) / 1000;
 
           normalizePosition();
 
@@ -436,29 +313,25 @@ const projects = [
       }
 
       /*
-       * حرکت دستی با فلش
+       * حرکت دستی
        */
       function moveBy(direction) {
 
-        const itemWidth =
-          getItemWidth();
+        const itemWidth = getItemWidth();
 
         /*
-         * در فارسی جهت حرکت فلش‌ها
-         * نسبت به انگلیسی معکوس می‌شود.
+         * direction:
+         *
+         * -1 = چپ
+         * +1 = راست
          */
-        const actualDirection =
-          isRTL
-            ? -direction
-            : direction;
 
-        currentX +=
-          actualDirection * itemWidth;
+        currentX += direction * itemWidth;
 
         normalizePosition();
 
         /*
-         * حرکت نرم
+         * تغییر موقعیت سریع ولی نرم
          */
         track.style.transition =
           'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)';
@@ -467,97 +340,62 @@ const projects = [
           `translate3d(${currentX}px, 0, 0)`;
 
         /*
-         * بعد از حرکت دستی،
-         * دوباره وارد حرکت عادی شو.
+         * بعد از حرکت فلش،
+         * دوباره وارد حالت حرکت عادی می‌شویم.
          */
         setTimeout(() => {
+          track.style.transition = 'none';
 
-          track.style.transition =
-            'none';
-
-          lastTime =
-            performance.now();
+          lastTime = performance.now();
 
         }, 450);
       }
 
       /*
-       * دکمه قبلی
+       * فلش چپ
        */
-      prevBtn.addEventListener(
-        'click',
-        () => {
-          moveBy(-1);
-        }
-      );
+      prevBtn.addEventListener('click', () => {
+        moveBy(-1);
+      });
 
       /*
-       * دکمه بعدی
+       * فلش راست
        */
-      nextBtn.addEventListener(
-        'click',
-        () => {
-          moveBy(1);
-        }
-      );
+      nextBtn.addEventListener('click', () => {
+        moveBy(1);
+      });
 
       /*
-       * توقف حرکت هنگام Hover
+       * توقف هنگام Hover
        */
-      container.addEventListener(
-        'mouseenter',
-        () => {
-          isPaused = true;
-        }
-      );
+      container.addEventListener('mouseenter', () => {
+        isPaused = true;
+      });
 
       /*
        * ادامه حرکت بعد از خروج موس
        */
-      container.addEventListener(
-        'mouseleave',
-        () => {
-
-          isPaused = false;
-
-          lastTime =
-            performance.now();
-        }
-      );
+      container.addEventListener('mouseleave', () => {
+        isPaused = false;
+        lastTime = performance.now();
+      });
 
       /*
-       * Resize
-       *
-       * بعد از تغییر اندازه صفحه،
-       * Loop دوباره محاسبه می‌شود.
+       * در Resize دوباره موقعیت را محاسبه می‌کنیم.
        */
-      let resizeTimer;
-
-      window.addEventListener(
-        'resize',
-        () => {
-
-          clearTimeout(resizeTimer);
-
-          resizeTimer =
-            setTimeout(() => {
-
-              setInitialPosition();
-
-            }, 150);
-        }
-      );
+      window.addEventListener('resize', () => {
+        setInitialPosition();
+      });
 
       /*
-       * اجرای اولیه
+       * تنظیم موقعیت اولیه
        */
       setInitialPosition();
 
       /*
-       * شروع انیمیشن
+       * شروع حرکت
        */
       requestAnimationFrame(animate);
     }
   }
 </script>
-```
