@@ -53,33 +53,3 @@ const partners = [
     .partner-item { width: 140px; height: 60px; }
   }
 </style>
-
-<script>
-  const track = document.getElementById('part-track');
-  const section = document.getElementById('partners');
-  if (!track || !section) return;
-
-  const prevBtn = section.querySelector('.prev');
-  const nextBtn = section.querySelector('.next');
-  
-  let position = 0;
-  const itemWidth = 204; 
-  const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
-  const totalItems = track.children.length / 2;
-  
-  // پر کردن اولیه صفحه
-  position = -(totalItems * itemWidth) + (visibleItems * itemWidth);
-  track.style.transform = `translateX(${position}px)`;
-
-  nextBtn.addEventListener('click', () => {
-    position -= itemWidth;
-    if (position < -(totalItems * itemWidth)) position = 0;
-    track.style.transform = `translateX(${position}px)`;
-  });
-
-  prevBtn.addEventListener('click', () => {
-    position += itemWidth;
-    if (position > 0) position = -(totalItems * itemWidth);
-    track.style.transform = `translateX(${position}px)`;
-  });
-</script>

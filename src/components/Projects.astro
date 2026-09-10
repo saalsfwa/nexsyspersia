@@ -1,4 +1,3 @@
-<!-- v2-fix -->
 ---
 interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
@@ -54,33 +53,3 @@ const projects = [
     .project-item { width: 120px; height: 120px; }
   }
 </style>
-
-<script>
-  const track = document.getElementById('proj-track');
-  const section = document.getElementById('projects');
-  if (!track || !section) return;
-
-  const prevBtn = section.querySelector('.prev');
-  const nextBtn = section.querySelector('.next');
-  
-  let position = 0;
-  const itemWidth = 184; 
-  const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
-  const totalItems = track.children.length / 2;
-  
-  // پر کردن اولیه صفحه
-  position = -(totalItems * itemWidth) + (visibleItems * itemWidth);
-  track.style.transform = `translateX(${position}px)`;
-
-  nextBtn.addEventListener('click', () => {
-    position -= itemWidth;
-    if (position < -(totalItems * itemWidth)) position = 0;
-    track.style.transform = `translateX(${position}px)`;
-  });
-
-  prevBtn.addEventListener('click', () => {
-    position += itemWidth;
-    if (position > 0) position = -(totalItems * itemWidth);
-    track.style.transform = `translateX(${position}px)`;
-  });
-</script>
