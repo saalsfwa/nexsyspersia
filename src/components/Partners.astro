@@ -3,11 +3,10 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
-// لیست کامل برندها با نام استاندارد برای فراخوانی لوگو
+// لیست پالایش شده: حذف تکرارها و موارد بدون لوگوی استاندارد
 const partners = [
   'Cisco', 'Hewlett Packard Enterprise', 'Dell Technologies', 'IBM', 'Microsoft', 
   'Huawei', 'Palo Alto Networks', 'Fortinet', 'CrowdStrike', 'Check Point Software Technologies',
-  'Accenture', 'EPAM Systems', 'Tata Consultancy Services', 'Infosys', 'Capgemini',
   'OpenAI', 'NVIDIA', 'Google DeepMind', 'Anthropic', 'Sophos',
   'Kaspersky', 'Hikvision', 'Dahua Technology', 'Axis Communications', 'Hanwha Vision',
   'Bosch', 'Avigilon', 'Siemens', 'Schneider Electric', 'Honeywell',
@@ -17,14 +16,12 @@ const partners = [
   'Amazon Alexa', 'Apple Home', 'Samsung SmartThings', 'Philips Hue'
 ];
 
-// تابع کمکی برای ساخت لینک لوگو
+// تابع هوشمند تولید لینک لوگو
 const getLogoUrl = (name: string) => {
-  // نگاشت نام‌های خاص به شناسه ساده‌آیکونز
   const map: Record<string, string> = {
     'Hewlett Packard Enterprise': 'hpe',
     'Palo Alto Networks': 'paloaltonetworks',
     'Check Point Software Technologies': 'checkpoint',
-    'Tata Consultancy Services': 'tcs',
     'Google DeepMind': 'google',
     'Hanwha Vision': 'hanwha',
     'Axis Communications': 'axis',
@@ -40,7 +37,7 @@ const getLogoUrl = (name: string) => {
   };
   
   const slug = map[name] || name.toLowerCase().replace(/\s+/g, '');
-  return `https://cdn.simpleicons.org/${slug}/FFFFFF`; // رنگ سفید برای تم مشکی
+  return `https://cdn.simpleicons.org/${slug}/FFFFFF`;
 };
 ---
 
@@ -75,11 +72,11 @@ const getLogoUrl = (name: string) => {
   .partners-section { padding: 60px 0 100px; overflow: hidden; }
   .slider-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
   .marquee-container { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
-  .marquee-content { display: flex; gap: 24px; width: max-content; animation: scrollRight 45s linear infinite; } /* زمان بیشتر برای تعداد زیاد */
+  .marquee-content { display: flex; gap: 24px; width: max-content; animation: scrollRight 40s linear infinite; }
   .marquee-content:hover { animation-play-state: paused; }
   
   .partner-item { 
-    width: 160px; /* کمی باریک‌تر برای جا شدن تعداد زیاد */
+    width: 160px; 
     height: 80px; 
     display: flex; 
     align-items: center; 
@@ -125,7 +122,7 @@ const getLogoUrl = (name: string) => {
     track.style.transform = `translateX(${currentPos}px)`;
     
     setTimeout(() => {
-      track.style.animation = 'scrollRight 45s linear infinite';
+      track.style.animation = 'scrollRight 40s linear infinite';
     }, 50);
 
     function stopAnimation() {
