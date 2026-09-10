@@ -27,7 +27,7 @@ const partners = [
       <button class="slider-btn prev" aria-label="Previous">&#10094;</button>
       
       <div class="marquee-container">
-        <div class="marquee-content partners-track">
+        <div class="marquee-content">
           {[...partners, ...partners].map(src => (
             <div class="partner-item"><img src={src} alt="Partner Logo" loading="lazy" /></div>
           ))}
@@ -72,22 +72,34 @@ const partners = [
     const prevBtn = section.querySelector('.prev');
     const nextBtn = section.querySelector('.next');
     
-    let manualOffset = 0;
-    const itemWidth = 204; // 180px width + 24px gap
+    const itemWidth = 204; // 180px + 24px gap
+    const totalItems = track.children.length / 2;
+    const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
     
-    function applyManualTransform() {
+    // تنظیم موقعیت اولیه برای پر کردن کامل صفحه در لحظه اول
+    let currentPos = -(totalItems * itemWidth) + (visibleItems * itemWidth);
+    track.style.transform = `translateX(${currentPos}px)`;
+    
+    // شروع انیمیشن بعد از تنظیم موقعیت اولیه
+    setTimeout(() => {
+      track.style.animation = 'scrollRight 25s linear infinite';
+    }, 50);
+
+    function stopAnimation() {
       track.style.animation = 'none';
-      track.style.transform = `translateX(${manualOffset}px)`;
+      track.style.transform = `translateX(${currentPos}px)`;
     }
 
     nextBtn.addEventListener('click', () => {
-      manualOffset -= itemWidth;
-      applyManualTransform();
+      stopAnimation();
+      currentPos -= itemWidth;
+      track.style.transform = `translateX(${currentPos}px)`;
     });
 
     prevBtn.addEventListener('click', () => {
-      manualOffset += itemWidth;
-      applyManualTransform();
+      stopAnimation();
+      currentPos += itemWidth;
+      track.style.transform = `translateX(${currentPos}px)`;
     });
   }
 </script>

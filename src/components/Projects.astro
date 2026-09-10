@@ -44,7 +44,7 @@ const projects = [
   .slider-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
   .marquee-container { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
   .marquee-content { display: flex; gap: 24px; width: max-content; animation: scrollRight 30s linear infinite; }
-  .marquee-content:hover { animation-play-state: paused; } /* توقف هنگام هاور */
+  .marquee-content:hover { animation-play-state: paused; }
   
   .project-item { width: 160px; height: 160px; border-radius: 8px; overflow: hidden; border: 1px solid var(--color-border); flex-shrink: 0; transition: transform 0.3s ease; }
   .project-item:hover { transform: scale(1.05); border-color: var(--color-accent); }
@@ -66,30 +66,40 @@ const projects = [
 </style>
 
 <script>
-  // منطق جاوااسکریپت فقط برای فلش‌ها (بدون تداخل با انیمیشن CSS)
   const section = document.getElementById('projects');
   if (section) {
     const track = section.querySelector('.marquee-content');
     const prevBtn = section.querySelector('.prev');
     const nextBtn = section.querySelector('.next');
     
-    let manualOffset = 0;
-    const itemWidth = 184; // 160px width + 24px gap
+    const itemWidth = 184; // 160px + 24px gap
+    const totalItems = track.children.length / 2;
+    const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
     
-    // متوقف کردن انیمیشن CSS وقتی کاربر دکمه می‌زند
-    function applyManualTransform() {
+    // تنظیم موقعیت اولیه برای پر کردن کامل صفحه در لحظه اول
+    let currentPos = -(totalItems * itemWidth) + (visibleItems * itemWidth);
+    track.style.transform = `translateX(${currentPos}px)`;
+    
+    // شروع انیمیشن بعد از تنظیم موقعیت اولیه
+    setTimeout(() => {
+      track.style.animation = 'scrollRight 30s linear infinite';
+    }, 50);
+
+    function stopAnimation() {
       track.style.animation = 'none';
-      track.style.transform = `translateX(${manualOffset}px)`;
+      track.style.transform = `translateX(${currentPos}px)`;
     }
 
     nextBtn.addEventListener('click', () => {
-      manualOffset -= itemWidth;
-      applyManualTransform();
+      stopAnimation();
+      currentPos -= itemWidth;
+      track.style.transform = `translateX(${currentPos}px)`;
     });
 
     prevBtn.addEventListener('click', () => {
-      manualOffset += itemWidth;
-      applyManualTransform();
+      stopAnimation();
+      currentPos += itemWidth;
+      track.style.transform = `translateX(${currentPos}px)`;
     });
   }
 </script>
