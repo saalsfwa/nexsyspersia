@@ -4,40 +4,49 @@ const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 const t = {
   fa: {
-    about: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت، هوشمندسازی و هوش مصنوعی.',
-    services: 'خدمات', company: 'شرکت',
-    aboutUs: 'درباره ما', contact: 'تماس',
+    about: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت، هوشمندسازی و هوش مصنوعی برای سازمان‌های پیشرو.',
+    services: 'خدمات', company: 'شرکت', contact: 'تماس',
+    projects: 'نمونه‌کارها', partners: 'همراهان استراتژیک',
+    email: 'ایمیل', phone: 'تلفن',
     rights: '© ۲۰۲۶ نکس‌سیس پرشیا. تمامی حقوق محفوظ است.'
   },
   en: {
-    about: 'Provider of integrated IT, security, smart building, and AI solutions.',
-    services: 'Services', company: 'Company',
-    aboutUs: 'About Us', contact: 'Contact',
+    about: 'Provider of integrated IT, security, smart building, and AI solutions for forward-thinking organizations.',
+    services: 'Services', company: 'Company', contact: 'Contact',
+    projects: 'Projects', partners: 'Partners',
+    email: 'Email', phone: 'Phone',
     rights: '© 2026 Nexsys Persia. All rights reserved.'
   }
 }[isFa ? 'fa' : 'en'];
-const services = isFa
-  ? ['زیرساخت IT', 'امنیت سایبری', 'CCTV و نظارت', 'هوشمندسازی', 'اتوماسیون صنعتی', 'هوش مصنوعی']
-  : ['IT Infrastructure', 'Cybersecurity', 'CCTV & Surveillance', 'Smart Building', 'Industrial Automation', 'Artificial Intelligence'];
 ---
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
-        <div class="logo" style="color: white;">nexsys<span>persia</span></div>
+        <div class="logo" style="color: white;">NEXSYS<span>PERSIA</span></div>
         <p>{t.about}</p>
       </div>
       <div>
         <h4>{t.services}</h4>
         <ul class="footer-links">
-          {services.slice(0, 5).map(s => <li><a href="#services">{s}</a></li>)}
+          <li><a href="#services">IT & Infrastructure</a></li>
+          <li><a href="#services">Cybersecurity</a></li>
+          <li><a href="#services">Smart Building</a></li>
         </ul>
       </div>
       <div>
         <h4>{t.company}</h4>
         <ul class="footer-links">
-          <li><a href="#about">{t.aboutUs}</a></li>
-          <li><a href="#contact">{t.contact}</a></li>
+          <li><a href="#projects">{t.projects}</a></li>
+          <li><a href="#partners">{t.partners}</a></li>
+          <li><a href="#about">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{t.contact}</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:info@nexsyspersia.ir">{t.email}: info@nexsyspersia.ir</a></li>
+          <li><a href="tel:+989161140612" dir="ltr">{t.phone}: 0916 114 0612</a></li>
         </ul>
       </div>
     </div>
