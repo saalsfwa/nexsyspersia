@@ -3,17 +3,20 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
+// ۱ لینک تصویر پروژه‌های شما
 const projects = [
-  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=400&fit=crop'
+  'https://s100.picofile.com/d/Dk3HXeHcN7PY7YTcpFcQ1PZqeLusDiGCenJ42VE2Hq05B3jOJCbhuyGn61z-j-szaWCcjmRJBHyIldTJMIC2GuFe/Picture15.webp',
+  'https://s100.picofile.com/d/AO7FvFstEIu89i_pGaa2XfC2095anvJT3Zg_oFzGMvYK_v5I8vqHqT1yErCkkvcvgr5c2qhn_uoNMap7sP-1utyb/Picture10.webp',
+  'https://s100.picofile.com/d/bYNQSvogkc5F3Aa3V1ILN30AsyI70w5WETx0nAWrvW8k18r5q3zB4BQwPGIKRc1vhd8OvIWqhqCKZt6Dt6OlAblT/Picture13.webp',
+  'https://s100.picofile.com/d/uN8V7U_VBEvrC-uinMvHu9UdLPe054Or7Rzu1-n8S2dTd8g_89uYeCn_d-yvAwlKScU3L8lsVvsSFwefCKupHiAz/Picture12.webp',
+  'https://s100.picofile.com/d/Ndc_EE91FnznqfToe-fkxRnhXl2s8xSBBaOB8PdCt7BVrtEIb6PnRlvJ_RLBY1qLqSI3AfVcEVyaBdWjRxo258I/Picture2.webp',
+  'https://s100.picofile.com/d/wYWo_Kij--OdpQc9JTLnC4ReymlYLwJRiaqzffSVUXqOdHKHWLq1cZSBxWjudp1ILpK5XvSAuISzFndKx35EW0M/Picture1.webp',
+  'https://s100.picofile.com/d/O9K-IvmrrfIJL4o6JHFNQyqQiQp-ybdgCoHIm8KA4Nuuwqehw3DYtP3Pqw3del0eYvGd1R311B27rogzOEYY3nw/Picture6.webp',
+  'https://s100.picofile.com/d/lUKaamGgJQnXPDhmt1qBD9mOB1wxfYUeVH_24UZNOFwKMfYJSzmCwUiXBJkt7ikVVJTTY26NUkxZrsUu2zLWz-b7/Picture27.webp',
+  'https://s100.picofile.com/d/dRAxL7oaNrnySOCSHnfd1GoApHhcxiim0g7YADz-0JtUxvzOHf0CsPgbp5QvgkhpcxMkAcxjXGKN9X8aSyCOY9ni/Picture26.webp',
+  'https://s100.picofile.com/d/bIV6fR9s8lQhz9QRkJj5kq0-UnAX02MYxu7kJFvaQ6V0TO_po_6wJznNqfFIAp1423bFHOH82uHvZqGxVxDmdE6T/Picture24.webp',
+  'https://s100.picofile.com/d/21mF8fLewfadaD0bT9COPtm_5GkUbLvGpotAYE2RWr-4UVlCg9XLSGEDeRTuE33NbtQxVLm2mVOeSinJp8gshQk/Picture4.webp',
+  'https://s100.picofile.com/d/tVNGboVDt7heWuE48CbwXjFA_BI-ZEW3hqFzBdditZrx2nMPk3CFgRuLG66FZXy5VgxI_XQutVGVytfv17VBu3A/Picture9.webp'
 ];
 ---
 
@@ -28,6 +31,7 @@ const projects = [
     
     <div class="slider-container">
       <div class="slider-track" id="proj-track">
+        {/* تکرار لیست برای ایجاد حلقه بی‌پایان */}
         {[...projects, ...projects].map(src => (
           <div class="project-item"><img src={src} alt="Project" loading="lazy" /></div>
         ))}
@@ -38,11 +42,22 @@ const projects = [
 
 <style>
   .projects-section { padding: 80px 0; overflow: hidden; }
-  .slider-container { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
-  .slider-track { display: flex; gap: 24px; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
+  .slider-container { 
+    width: 100%; 
+    overflow: hidden; 
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
+  }
+  .slider-track { 
+    display: flex; 
+    gap: 24px; 
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
+    will-change: transform; 
+  }
   
+  /* محاسبه عرض دقیق برای نمایش ۶ آیتم در دسکتاپ */
   .project-item { 
-    width: calc((100% - 120px) / 6); /* دقیقاً  آیتم در هر ردیف */
+    width: calc((100% - 120px) / 6); 
     aspect-ratio: 1/1; 
     border-radius: 8px; 
     overflow: hidden; 
@@ -54,6 +69,7 @@ const projects = [
   .project-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: filter 0.3s; }
   .project-item:hover img { filter: grayscale(0%); }
   
+  /* ریسپانسیو برای تبلت و موبایل */
   @media (max-width: 1024px) { .project-item { width: calc((100% - 72px) / 4); } }
   @media (max-width: 768px) { .project-item { width: calc((100% - 24px) / 2); } }
   @media (max-width: 480px) { .project-item { width: 100%; } }
@@ -64,15 +80,16 @@ const projects = [
   if (section) {
     const track = section.querySelector('.slider-track');
     let currentIndex = 0;
-    const itemsPerSlide = 6;
+    const itemsPerSlide = 6; // نمایش ۶ تا در هر سری
     const totalItems = track.children.length / 2;
     const maxIndex = totalItems - itemsPerSlide;
     
     function goToNext() {
       currentIndex++;
+      // وقتی به انتهای لیست رسید، برگردد به اول
       if (currentIndex > maxIndex) currentIndex = 0;
       
-      const itemWidth = track.firstElementChild!.offsetWidth + 24; // width + gap
+      const itemWidth = track.firstElementChild!.offsetWidth + 24; // عرض آیتم + فاصله
       track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
     }
 
