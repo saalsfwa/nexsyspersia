@@ -3,7 +3,7 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
-// 12 لینک تصویر پروژه‌های شما
+// 12 لینک تصویر پروژه‌های شما (حفظ شده)
 const projects = [
   'https://s100.picofile.com/d/Dk3HXeHcN7PY7YTcpFcQ1PZqeLusDiGCenJ42VE2Hq05B3jOJCbhuyGn61z-j-szaWCcjmRJBHyIldTJMIC2GuFe/Picture15.webp',
   'https://s100.picofile.com/d/AO7FvFstEIu89i_pGaa2XfC2095anvJT3Zg_oFzGMvYK_v5I8vqHqT1yErCkkvcvgr5c2qhn_uoNMap7sP-1utyb/Picture10.webp',
@@ -23,7 +23,7 @@ const projects = [
 <section class="section projects-section" id="projects">
   <div class="container">
     <h2 class="section-title" style="text-align: center;">
-      {isFa ? 'پروژه های ' : 'Featured '}<span class="gradient-text">{isFa ? 'شاخص' : 'Projects'}</span>
+      {isFa ? 'نمونه‌کارهای ' : 'Featured '}<span class="gradient-text">{isFa ? 'شاخص' : 'Projects'}</span>
     </h2>
     <p class="section-subtitle" style="text-align: center; margin: 0 auto 40px;">
       {isFa ? 'گزیده‌ای از پروژه‌های اجرایی و موفق ما' : 'A selection of our successful executed projects'}
@@ -47,11 +47,12 @@ const projects = [
     mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
     -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
   }
-  /* حذف transition برای جلوگیری از هرگونه حرکت */
+  
+  /* حذف کامل هرگونه transition یا animation */
   .slider-track { 
     display: flex; 
     gap: 24px; 
-    will-change: transform; 
+    /* هیچ transition ای وجود ندارد */
   }
   
   /* محاسبه عرض دقیق برای نمایش ۶ آیتم در دسکتاپ */
@@ -62,10 +63,10 @@ const projects = [
     overflow: hidden; 
     border: 1px solid var(--color-border);
     flex-shrink: 0;
-    transition: transform 0.3s ease;
+    /* فقط هاور روی خود عکس مجاز است، نه حرکت اسلایدر */
   }
   .project-item:hover { transform: scale(1.05); border-color: var(--color-accent); }
-  .project-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: filter 0.3s; }
+  .project-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); }
   .project-item:hover img { filter: grayscale(0%); }
   
   /* ریسپانسیو برای تبلت و موبایل */
@@ -89,7 +90,8 @@ const projects = [
       if (currentIndex > maxIndex) currentIndex = 0;
       
       const itemWidth = track.firstElementChild!.offsetWidth + 24; // عرض آیتم + فاصله
-      // تغییر ناگهانی بدون انیمیشن
+      
+      // تغییر ناگهانی و بدون انیمیشن (Instant Swap)
       track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
     }
 
