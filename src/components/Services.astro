@@ -4,37 +4,37 @@ const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
 const services = isFa ? [
-  { icon: 'server', title: 'زیرساخت و شبکه', desc: 'طراحی و پیاده‌سازی سرورها، شبکه‌های سازمانی و دیتاسنتر.' },
-  { icon: 'shield', title: 'امنیت سایبری', desc: 'تست نفوذ، ارزیابی آسیب‌پذیری و محافظت از داده‌های حیاتی.' },
-  { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'اتوماسیون خانگی و اداری، مدیریت انرژی و کنترل دسترسی.' },
-  { icon: 'cpu', title: 'اتوماسیون صنعتی', desc: 'کنترل فرآیندها، مانیتورینگ خطوط تولید و سیستم‌های اسکادا.' },
-  { icon: 'brain', title: 'هوش مصنوعی', desc: 'تحلیل داده، یادگیری ماشین و پردازش تصویر هوشمند.' },
-  { icon: 'network', title: 'زیرساخت ارتباطی و مخابرات', desc: 'طراحی و پیاده‌سازی VoIP، تلفن تحت شبکه، ارتباطات بین شعب، VPN، لینک‌های ارتباطی، رادیو وایرلس، فیبر نوری و زیرساخت‌های ارتباطی سازمانی.' },
-  { icon: 'cloud', title: 'رایانش ابری', desc: 'مهاجرت به کلاود، مدیریت سرورهای ابری و بهینه‌سازی منابع.' },
-  { icon: 'code', title: 'توسعه نرم‌افزار', desc: 'طراحی وب‌سایت، اپلیکیشن‌های موبایل و سامانه‌های اختصاصی.' },
-  { icon: 'support', title: 'پشتیبانی فنی', desc: 'خدمات نگهداری، مانیتورینگ ۲۴ ساعته و رفع مشکلات فنی.' }
+  { icon: 'server', title: 'IT و زیرساخت دیجیتال', desc: 'طراحی شبکه، سرور، دیتاسنتر، Cloud، مجازی‌سازی و پشتیبانی زیرساخت‌های فناوری اطلاعات.' },
+  { icon: 'shield', title: 'امنیت سایبری', desc: 'Firewall، امنیت شبکه، EDR/XDR، SIEM، ارزیابی آسیب‌پذیری و محافظت کامل از دارایی‌های دیجیتال.' },
+  { icon: 'camera', title: 'نظارت تصویری و CCTV', desc: 'دوربین‌های IP، آنالیز ویدیویی مبتنی بر AI، پلاک‌خوان، تشخیص چهره و اتاق مانیتورینگ.' },
+  { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'Smart Home، BMS، کنترل روشنایی، HVAC، مدیریت انرژی و یکپارچه‌سازی سیستم‌ها.' },
+  { icon: 'cpu', title: 'اتوماسیون صنعتی', desc: 'Industrial IT، شبکه‌ی صنعتی، SCADA، PLC، IIoT و امنیت شبکه‌های OT.' },
+  { icon: 'brain', title: 'هوش مصنوعی و AI', desc: 'Video Analytics، Chatbot سازمانی، Predictive Maintenance و Computer Vision صنعتی.' },
+  { icon: 'code', title: 'توسعه نرم‌افزار', desc: 'طراحی وب‌سایت، Web App، اپلیکیشن موبایل، CRM/ERP و داشبوردهای BI.' },
+  { icon: 'alert', title: 'ایمنی و اعلام حریق', desc: 'سیستم‌های اعلام و اطفای حریق، PA، کنترل تردد و سیستم‌های حفاظتی.' },
+  { icon: 'network', title: 'زیرساخت ارتباطی و مخابرات', desc: 'طراحی و پیاده‌سازی VoIP، تلفن تحت شبکه، ارتباطات بین شعب، VPN، لینک‌های ارتباطی، رادیو وایرلس، فیبر نوری و زیرساخت‌های ارتباطی سازمانی.' }
 ] : [
-  { icon: 'server', title: 'Infrastructure & Network', desc: 'Design of servers, enterprise networks, and data centers.' },
-  { icon: 'shield', title: 'Cybersecurity', desc: 'Penetration testing, vulnerability assessment, and data protection.' },
-  { icon: 'home', title: 'Smart Building', desc: 'Home automation, energy management, and access control.' },
-  { icon: 'cpu', title: 'Industrial Automation', desc: 'Process control, production monitoring, and SCADA systems.' },
-  { icon: 'brain', title: 'Artificial Intelligence', desc: 'Data analysis, machine learning, and image processing.' },
-  { icon: 'network', title: 'Communication Infrastructure', desc: 'VoIP, IP telephony, branch connectivity, VPN, wireless links, fiber optics, and enterprise communication infrastructure.' },
-  { icon: 'cloud', title: 'Cloud Computing', desc: 'Cloud migration, cloud server management, and resource optimization.' },
-  { icon: 'code', title: 'Software Development', desc: 'Website design, mobile applications, and custom systems.' },
-  { icon: 'support', title: 'Technical Support', desc: 'Maintenance services, 24/7 monitoring, and technical troubleshooting.' }
+  { icon: 'server', title: 'Digital Infrastructure & IT', desc: 'Network design, servers, data centers, Cloud, virtualization, and IT infrastructure support.' },
+  { icon: 'shield', title: 'Cybersecurity', desc: 'Firewall, network security, EDR/XDR, SIEM, vulnerability assessment, and full digital asset protection.' },
+  { icon: 'camera', title: 'Video Surveillance & CCTV', desc: 'IP cameras, AI-based video analytics, license plate recognition, face detection, and monitoring rooms.' },
+  { icon: 'home', title: 'Smart Building', desc: 'Smart Home, BMS, lighting control, HVAC, energy management, and system integration.' },
+  { icon: 'cpu', title: 'Industrial Automation', desc: 'Industrial IT, industrial networks, SCADA, PLC, IIoT, and OT network security.' },
+  { icon: 'brain', title: 'Artificial Intelligence & AI', desc: 'Video Analytics, Enterprise Chatbot, Predictive Maintenance, and Industrial Computer Vision.' },
+  { icon: 'code', title: 'Software Development', desc: 'Website design, Web Apps, mobile applications, CRM/ERP, and BI dashboards.' },
+  { icon: 'alert', title: 'Safety & Fire Alarm', desc: 'Fire detection and suppression systems, PA, access control, and protective systems.' },
+  { icon: 'network', title: 'Communication Infrastructure', desc: 'Design and implementation of VoIP, IP telephony, branch connectivity, VPN, wireless links, fiber optics, and enterprise communication infrastructure.' }
 ];
 
 const icons = {
   server: '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
   shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  camera: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
   home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
   cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
   brain: '<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>',
-  network: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
-  cloud: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>',
   code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
-  support: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>'
+  alert: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  network: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
 };
 ---
 
