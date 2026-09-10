@@ -25,17 +25,13 @@ const projects = [
     
     <div class="slider-wrapper">
       <button class="slider-btn prev" aria-label="Previous">&#10094;</button>
-      
       <div class="slider-track-container">
-        <div class="slider-track">
+        <div class="slider-track" id="proj-track">
           {[...projects, ...projects].map(src => (
-            <div class="project-item">
-              <img src={src} alt="Project" loading="lazy" />
-            </div>
+            <div class="project-item"><img src={src} alt="Project" loading="lazy" /></div>
           ))}
         </div>
       </div>
-      
       <button class="slider-btn next" aria-label="Next">&#10095;</button>
     </div>
   </div>
@@ -50,10 +46,8 @@ const projects = [
   .project-item:hover { transform: scale(1.05); border-color: var(--color-accent); }
   .project-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: filter 0.3s; }
   .project-item:hover img { filter: grayscale(0%); }
-  
   .slider-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); color: #fff; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s; flex-shrink: 0; z-index: 10; }
   .slider-btn:hover { background: #fff; color: #000; border-color: #fff; }
-  
   @media (max-width: 768px) {
     .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
     .project-item { width: 120px; height: 120px; }
@@ -61,30 +55,31 @@ const projects = [
 </style>
 
 <script>
-  const track = document.querySelector('.slider-track');
-  const prevBtn = document.querySelector('.slider-btn.prev');
-  const nextBtn = document.querySelector('.slider-btn.next');
-  if (!track || !prevBtn || !nextBtn) return;
+  const track = document.getElementById('proj-track');
+  const section = document.getElementById('projects');
+  if (!track || !section) return;
 
-  let position = 0;
-  const itemWidth = 184; // 160px + 24px gap
-  const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+  const prevBtn = section.querySelector('.prev');
+  const nextBtn = section.querySelector('.next');
   
-  // Set initial position to show full row immediately
+  let position = 0;
+  const itemWidth = 184; 
+  const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
   const totalItems = track.children.length / 2;
+  
+  // پر کردن اولیه صفحه
   position = -(totalItems * itemWidth) + (visibleItems * itemWidth);
   track.style.transform = `translateX(${position}px)`;
 
   nextBtn.addEventListener('click', () => {
     position -= itemWidth;
-    const minPos = -(totalItems * itemWidth);
-    if (position < minPos) position = 0;
+    if (position < -(totalItems * itemWidth)) position = 0;
     track.style.transform = `translateX(${position}px)`;
   });
 
   prevBtn.addEventListener('click', () => {
     position += itemWidth;
-    if (position > 0) position = minPos;
+    if (position > 0) position = -(totalItems * itemWidth);
     track.style.transform = `translateX(${position}px)`;
   });
 </script>

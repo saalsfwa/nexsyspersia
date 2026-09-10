@@ -25,17 +25,13 @@ const partners = [
     
     <div class="slider-wrapper">
       <button class="slider-btn prev" aria-label="Previous">&#10094;</button>
-      
       <div class="slider-track-container">
-        <div class="slider-track partners-track">
+        <div class="slider-track" id="part-track">
           {[...partners, ...partners].map(src => (
-            <div class="partner-item">
-              <img src={src} alt="Partner Logo" loading="lazy" />
-            </div>
+            <div class="partner-item"><img src={src} alt="Partner Logo" loading="lazy" /></div>
           ))}
         </div>
       </div>
-      
       <button class="slider-btn next" aria-label="Next">&#10095;</button>
     </div>
   </div>
@@ -50,10 +46,8 @@ const partners = [
   .partner-item:hover { background: rgba(255,255,255,0.05); border-color: var(--color-accent); }
   .partner-item img { max-width: 100%; max-height: 100%; object-fit: contain; filter: brightness(0) invert(1) opacity(0.6); transition: filter 0.3s; }
   .partner-item:hover img { filter: brightness(0) invert(1) opacity(1); }
-  
   .slider-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--color-border); color: #fff; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s; flex-shrink: 0; z-index: 10; }
   .slider-btn:hover { background: #fff; color: #000; border-color: #fff; }
-  
   @media (max-width: 768px) {
     .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
     .partner-item { width: 140px; height: 60px; }
@@ -61,30 +55,31 @@ const partners = [
 </style>
 
 <script>
-  const track = document.querySelector('.partners-track');
-  const prevBtn = document.querySelector('.partners-section .slider-btn.prev');
-  const nextBtn = document.querySelector('.partners-section .slider-btn.next');
-  if (!track || !prevBtn || !nextBtn) return;
+  const track = document.getElementById('part-track');
+  const section = document.getElementById('partners');
+  if (!track || !section) return;
 
-  let position = 0;
-  const itemWidth = 204; // 180px + 24px gap
-  const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+  const prevBtn = section.querySelector('.prev');
+  const nextBtn = section.querySelector('.next');
   
-  // Set initial position to show full row immediately
+  let position = 0;
+  const itemWidth = 204; 
+  const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
   const totalItems = track.children.length / 2;
+  
+  // پر کردن اولیه صفحه
   position = -(totalItems * itemWidth) + (visibleItems * itemWidth);
   track.style.transform = `translateX(${position}px)`;
 
   nextBtn.addEventListener('click', () => {
     position -= itemWidth;
-    const minPos = -(totalItems * itemWidth);
-    if (position < minPos) position = 0;
+    if (position < -(totalItems * itemWidth)) position = 0;
     track.style.transform = `translateX(${position}px)`;
   });
 
   prevBtn.addEventListener('click', () => {
     position += itemWidth;
-    if (position > 0) position = minPos;
+    if (position > 0) position = -(totalItems * itemWidth);
     track.style.transform = `translateX(${position}px)`;
   });
 </script>
