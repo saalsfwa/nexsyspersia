@@ -9,14 +9,20 @@ const services = isFa ? [
   { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'اتوماسیون خانگی و اداری، مدیریت انرژی و کنترل دسترسی.' },
   { icon: 'cpu', title: 'اتوماسیون صنعتی', desc: 'کنترل فرآیندها، مانیتورینگ خطوط تولید و سیستم‌های اسکادا.' },
   { icon: 'brain', title: 'هوش مصنوعی', desc: 'تحلیل داده، یادگیری ماشین و پردازش تصویر هوشمند.' },
-  { icon: 'network', title: 'زیرساخت ارتباطی', desc: 'VoIP، تلفن تحت شبکه، VPN، فیبر نوری و لینک‌های وایرلس.' }
+  { icon: 'network', title: 'زیرساخت ارتباطی و مخابرات', desc: 'طراحی و پیاده‌سازی VoIP، تلفن تحت شبکه، ارتباطات بین شعب، VPN، لینک‌های ارتباطی، رادیو وایرلس، فیبر نوری و زیرساخت‌های ارتباطی سازمانی.' },
+  { icon: 'cloud', title: 'رایانش ابری', desc: 'مهاجرت به کلاود، مدیریت سرورهای ابری و بهینه‌سازی منابع.' },
+  { icon: 'code', title: 'توسعه نرم‌افزار', desc: 'طراحی وب‌سایت، اپلیکیشن‌های موبایل و سامانه‌های اختصاصی.' },
+  { icon: 'support', title: 'پشتیبانی فنی', desc: 'خدمات نگهداری، مانیتورینگ ۲۴ ساعته و رفع مشکلات فنی.' }
 ] : [
   { icon: 'server', title: 'Infrastructure & Network', desc: 'Design of servers, enterprise networks, and data centers.' },
   { icon: 'shield', title: 'Cybersecurity', desc: 'Penetration testing, vulnerability assessment, and data protection.' },
   { icon: 'home', title: 'Smart Building', desc: 'Home automation, energy management, and access control.' },
   { icon: 'cpu', title: 'Industrial Automation', desc: 'Process control, production monitoring, and SCADA systems.' },
   { icon: 'brain', title: 'Artificial Intelligence', desc: 'Data analysis, machine learning, and image processing.' },
-  { icon: 'network', title: 'Communication Infra', desc: 'VoIP, IP telephony, VPN, fiber optics, and wireless links.' }
+  { icon: 'network', title: 'Communication Infrastructure', desc: 'VoIP, IP telephony, branch connectivity, VPN, wireless links, fiber optics, and enterprise communication infrastructure.' },
+  { icon: 'cloud', title: 'Cloud Computing', desc: 'Cloud migration, cloud server management, and resource optimization.' },
+  { icon: 'code', title: 'Software Development', desc: 'Website design, mobile applications, and custom systems.' },
+  { icon: 'support', title: 'Technical Support', desc: 'Maintenance services, 24/7 monitoring, and technical troubleshooting.' }
 ];
 
 const icons = {
@@ -25,7 +31,10 @@ const icons = {
   home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
   cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
   brain: '<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>',
-  network: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
+  network: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  cloud: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>',
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  support: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>'
 };
 ---
 
