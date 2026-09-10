@@ -3,7 +3,6 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
-// 12 لینک تصویر پروژه‌های شما (حفظ شده)
 const projects = [
   'https://s100.picofile.com/d/Dk3HXeHcN7PY7YTcpFcQ1PZqeLusDiGCenJ42VE2Hq05B3jOJCbhuyGn61z-j-szaWCcjmRJBHyIldTJMIC2GuFe/Picture15.webp',
   'https://s100.picofile.com/d/AO7FvFstEIu89i_pGaa2XfC2095anvJT3Zg_oFzGMvYK_v5I8vqHqT1yErCkkvcvgr5c2qhn_uoNMap7sP-1utyb/Picture10.webp',
@@ -29,73 +28,61 @@ const projects = [
       {isFa ? 'گزیده‌ای از پروژه‌های اجرایی و موفق ما' : 'A selection of our successful executed projects'}
     </p>
     
-    <div class="slider-container">
-      <div class="slider-track" id="proj-track">
-        {[...projects, ...projects].map(src => (
-          <div class="project-item"><img src={src} alt="Project" loading="lazy" /></div>
-        ))}
-      </div>
+    <div class="projects-grid" id="proj-grid">
+      {projects.map((src, i) => (
+        <div class={`project-item ${i < 6 ? 'visible' : ''}`}>
+          <img src={src} alt="Project" loading="lazy" />
+        </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
   .projects-section { padding: 80px 0; overflow: hidden; }
-  .slider-container { 
-    width: 100%; 
-    overflow: hidden; 
-    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
-    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); 
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
   }
   
-  /* حذف کامل هرگونه transition یا animation */
-  .slider-track { 
-    display: flex; 
-    gap: 24px; 
-    /* هیچ transition ای وجود ندارد */
-  }
-  
-  /* محاسبه عرض دقیق برای نمایش ۶ آیتم در دسکتاپ */
-  .project-item { 
-    width: calc((100% - 120px) / 6); 
-    aspect-ratio: 1/1; 
-    border-radius: 8px; 
-    overflow: hidden; 
+  .project-item {
+    display: none;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    overflow: hidden;
     border: 1px solid var(--color-border);
-    flex-shrink: 0;
-    /* فقط هاور روی خود عکس مجاز است، نه حرکت اسلایدر */
   }
-  .project-item:hover { transform: scale(1.05); border-color: var(--color-accent); }
+  .project-item.visible { display: block; }
+  
   .project-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); }
   .project-item:hover img { filter: grayscale(0%); }
   
-  /* ریسپانسیو برای تبلت و موبایل */
-  @media (max-width: 1024px) { .project-item { width: calc((100% - 72px) / 4); } }
-  @media (max-width: 768px) { .project-item { width: calc((100% - 24px) / 2); } }
-  @media (max-width: 480px) { .project-item { width: 100%; } }
+  @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .projects-grid { grid-template-columns: 1fr; } }
 </style>
 
 <script>
-  const section = document.getElementById('projects');
-  if (section) {
-    const track = section.querySelector('.slider-track');
-    let currentIndex = 0;
-    const itemsPerSlide = 6; // نمایش ۶ تا در هر سری
-    const totalItems = track.children.length / 2;
-    const maxIndex = totalItems - itemsPerSlide;
+  var grid = document.getElementById('proj-grid');
+  if (grid) {
+    var items = grid.querySelectorAll('.project-item');
+    var perSlide = 6;
+    var pages = Math.ceil(items.length / perSlide);
+    var page = 0;
     
-    function goToNext() {
-      currentIndex++;
-      // وقتی به انتهای لیست رسید، برگردد به اول
-      if (currentIndex > maxIndex) currentIndex = 0;
-      
-      const itemWidth = track.firstElementChild!.offsetWidth + 24; // عرض آیتم + فاصله
-      
-      // تغییر ناگهانی و بدون انیمیشن (Instant Swap)
-      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-    }
-
-    // شروع تعویض خودکار هر ۵ ثانیه
-    setInterval(goToNext, 5000);
+    setInterval(function () {
+      page = (page + 1) % pages;
+      var start = page * perSlide;
+      var end = start + perSlide;
+      for (var i = 0; i < items.length; i++) {
+        if (i >= start && i < end) {
+          items[i].classList.add('visible');
+        } else {
+          items[i].classList.remove('visible');
+        }
+      }
+    }, 5000);
   }
 </script>

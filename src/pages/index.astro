@@ -24,36 +24,3 @@ import Footer from '../components/Footer.astro';
   </main>
   <Footer lang="fa" />
 </Layout>
-
-<script>
-  function initSlider(trackId, sectionId, itemWidth) {
-    var track = document.getElementById(trackId);
-    var section = document.getElementById(sectionId);
-    if (!track || !section) return;
-
-    var prevBtn = section.querySelector('.prev');
-    var nextBtn = section.querySelector('.next');
-    
-    var pos = 0;
-    var visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
-    var totalItems = track.children.length / 2;
-    
-    pos = -(totalItems * itemWidth) + (visibleItems * itemWidth);
-    track.style.transform = 'translateX(' + pos + 'px)';
-
-    nextBtn.addEventListener('click', function() {
-      pos -= itemWidth;
-      if (pos < -(totalItems * itemWidth)) pos = 0;
-      track.style.transform = 'translateX(' + pos + 'px)';
-    });
-
-    prevBtn.addEventListener('click', function() {
-      pos += itemWidth;
-      if (pos > 0) pos = -(totalItems * itemWidth);
-      track.style.transform = 'translateX(' + pos + 'px)';
-    });
-  }
-
-  initSlider('proj-track', 'projects', 184);
-  initSlider('part-track', 'partners', 204);
-</script>
