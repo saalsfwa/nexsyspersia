@@ -1,21 +1,15 @@
 ﻿---
-interface Props {
-  lang?: 'fa' | 'en';
-}
-
+interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
-
 const t = {
   fa: {
     badge: 'پیشرو در فناوری‌های نوین',
     title1: 'آینده‌ی دیجیتال',
-    title2: 'تکنولوژی برای همه',
-    desc: 'نکس‌سیس پرشیا، ارائه‌دهنده راهکارهای یکپارچه فناوری اطلاعات، امنیت سایبری، هوشمندسازی ساختمان، اتوماسیون صنعتی و هوش مصنوعی.',
+    title2: 'را می‌سازیم',
+    desc: 'نکس‌سیس پرشیا، ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت سایبری، هوشمندسازی ساختمان، اتوماسیون صنعتی و هوش مصنوعی برای سازمان‌های پیشرو.',
     cta1: 'مشاهده خدمات',
-    cta2: 'مشاوره رایگان',
-    previous: 'تصویر قبلی',
-    next: 'تصویر بعدی'
+    cta2: 'درخواست مشاوره'
   },
   en: {
     badge: 'Leading in Modern Technologies',
@@ -23,493 +17,90 @@ const t = {
     title2: 'Future',
     desc: 'Nexsys Persia provides integrated IT, cybersecurity, smart building, industrial automation, and AI solutions for forward-thinking organizations.',
     cta1: 'Explore Services',
-    cta2: 'Get Consultation',
-    previous: 'Previous slide',
-    next: 'Next slide'
+    cta2: 'Get Consultation'
   }
 }[isFa ? 'fa' : 'en'];
 
-/*
- * تصاویر Hero
- */
+// تصاویر اسلایدشو - لینک‌های خودتان را اینجا بگذارید
 const slides = [
-  'https://s100.picofile.com/d/5EjaK8YNsUjp6qj5EU5Oz3r3RzWx-SucydEYNJ-RLT6FXWoFbopQbKIwMxDukC_bv1NxgvnhWFz5CaPmUSUvDdXEM7v0NcjjDFrEoylfo_xIz1DZnM6Ougtlwro/1135D207-140D-4BFF-964D-82CBF4D132D0.png',
-  'https://s100.picofile.com/d/QUb3NqXL1yND4sQOT8ALC5xw16DxyWYCS6XKt8OTTvwlfhWdzk-oMWxYdntBrKW3KZ9UIkBYy-Z9YGKv3lPqD4r2seGltk7s59OyiWxQ1OFuBe-j/the-most-futuristic-house-2.webp',
-  'https://s100.picofile.com/d/6hlH6vRLBqP_wvPYJAf39DA3Rq2K3URJXSrp47gLuiC_Yj28UHDwPN6ozj4EyixfFWhSW0_EJ95MiM_nNg/2-11.webp'
+  'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=800&fit=crop',
+  'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=800&fit=crop',
+  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=800&fit=crop'
 ];
 ---
 
-<section class="hero" id="home" dir={isFa ? 'rtl' : 'ltr'}>
+<section class="hero">
   <div class="container">
     <div class="hero-grid">
-
-      <!-- متن Hero -->
       <div class="hero-text fade-up">
-
-        <div class="hero-badge">
-          {t.badge}
-        </div>
-
+        <div class="hero-badge">{t.badge}</div>
         <h1>
-          {t.title1}
-          <br />
+          {t.title1}<br/>
           <span class="gradient-text">{t.title2}</span>
         </h1>
-
-        <p>
-          {t.desc}
-        </p>
-
+        <p>{t.desc}</p>
         <div class="hero-buttons">
-
           <a href="#services" class="btn btn-primary">
-            <span>{t.cta1}</span>
-
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              {isFa ? (
-                <>
-                  <line x1="19" y1="12" x2="5" y2="12" />
-                  <polyline points="12 19 5 12 12 5" />
-                </>
-              ) : (
-                <>
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </>
-              )}
+            {t.cta1}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              {isFa ? '<><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>' : '<><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>'}
             </svg>
           </a>
-
-          <a href="#contact" class="btn btn-outline">
-            {t.cta2}
-          </a>
-
+          <a href="#contact" class="btn btn-outline">{t.cta2}</a>
         </div>
       </div>
-
-      <!-- Hero Slider -->
+      
       <div class="hero-slider fade-up">
-
-        <div
-          class="slider-container"
-          data-hero-slider
-          aria-label={isFa ? 'اسلایدهای معرفی' : 'Hero slides'}
-        >
-
+        <div class="slider-container">
           {slides.map((src, i) => (
-            <div
-              class={`slide ${i === 0 ? 'active' : ''}`}
-              data-slide
-              aria-hidden={i === 0 ? 'false' : 'true'}
-            >
-              <img
-                src={src}
-                alt={
-                  isFa
-                    ? `راهکار فناوری نکس‌سیس پرشیا ${i + 1}`
-                    : `Nexsys Persia technology solution ${i + 1}`
-                }
-                loading={i === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
+            <div class={`slide ${i === 0 ? 'active' : ''}`}>
+              <img src={src} alt={`Slide ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} />
             </div>
           ))}
-
-          <!-- دکمه‌های ناوبری -->
-          <button
-            type="button"
-            class="hero-slider-arrow hero-slider-prev"
-            data-slider-prev
-            aria-label={t.previous}
-          >
-            {isFa ? '‹' : '‹'}
-          </button>
-
-          <button
-            type="button"
-            class="hero-slider-arrow hero-slider-next"
-            data-slider-next
-            aria-label={t.next}
-          >
-            {isFa ? '›' : '›'}
-          </button>
-
-          <!-- نقاط -->
-          <div class="slider-dots" role="tablist">
+          <div class="slider-dots">
             {slides.map((_, i) => (
-              <button
-                type="button"
-                class={`dot ${i === 0 ? 'active' : ''}`}
-                data-dot
-                data-index={i}
-                aria-label={
-                  isFa
-                    ? `نمایش تصویر ${i + 1}`
-                    : `Show slide ${i + 1}`
-                }
-                aria-selected={i === 0 ? 'true' : 'false'}
-              >
-              </button>
+              <span class={`dot ${i === 0 ? 'active' : ''}`} data-index={i}></span>
             ))}
           </div>
-
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  const heroSliders = document.querySelectorAll('[data-hero-slider]');
-
-  heroSliders.forEach((container) => {
-    const slides = Array.from(
-      container.querySelectorAll('[data-slide]')
-    );
-
-    const dots = Array.from(
-      container.querySelectorAll('[data-dot]')
-    );
-
-    const prevButton = container.querySelector('[data-slider-prev]');
-    const nextButton = container.querySelector('[data-slider-next]');
-
-    if (!slides.length) return;
-
+  const containers = document.querySelectorAll('.slider-container');
+  
+  containers.forEach(container => {
+    const slides = container.querySelectorAll('.slide');
+    const dots = container.querySelectorAll('.dot');
+    if (slides.length === 0) return;
+    
     let currentIndex = 0;
-    let intervalId;
-
-    function showSlide(index) {
-      currentIndex = (index + slides.length) % slides.length;
-
-      slides.forEach((slide, i) => {
-        const active = i === currentIndex;
-
-        slide.classList.toggle('active', active);
-        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
-      });
-
-      dots.forEach((dot, i) => {
-        const active = i === currentIndex;
-
-        dot.classList.toggle('active', active);
-        dot.setAttribute(
-          'aria-selected',
-          active ? 'true' : 'false'
-        );
-      });
+    
+    function goToSlide(index) {
+      slides[currentIndex].classList.remove('active');
+      dots[currentIndex].classList.remove('active');
+      currentIndex = index;
+      slides[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
     }
-
+    
     function nextSlide() {
-      showSlide(currentIndex + 1);
+      const next = (currentIndex + 1) % slides.length;
+      goToSlide(next);
     }
-
-    function prevSlide() {
-      showSlide(currentIndex - 1);
-    }
-
-    function startAutoPlay() {
-      clearInterval(intervalId);
-      intervalId = window.setInterval(nextSlide, 5000);
-    }
-
-    function stopAutoPlay() {
-      clearInterval(intervalId);
-    }
-
-    nextButton?.addEventListener('click', () => {
-      nextSlide();
-      startAutoPlay();
-    });
-
-    prevButton?.addEventListener('click', () => {
-      prevSlide();
-      startAutoPlay();
-    });
-
-    dots.forEach((dot, index) => {
+    
+    // تعویض خودکار هر 5 ثانیه
+    const interval = setInterval(nextSlide, 5000);
+    
+    // کلیک روی dots
+    dots.forEach((dot, i) => {
       dot.addEventListener('click', () => {
-        showSlide(index);
-        startAutoPlay();
+        clearInterval(interval);
+        goToSlide(i);
+        setInterval(nextSlide, 5000);
       });
     });
-
-    container.addEventListener('mouseenter', stopAutoPlay);
-    container.addEventListener('mouseleave', startAutoPlay);
-
-    container.addEventListener('focusin', stopAutoPlay);
-    container.addEventListener('focusout', startAutoPlay);
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopAutoPlay();
-      } else {
-        startAutoPlay();
-      }
-    });
-
-    showSlide(0);
-    startAutoPlay();
   });
 </script>
-
-<style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 70px;
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
-    margin-bottom: 20px;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.85rem;
-    backdrop-filter: blur(10px);
-  }
-
-  .hero h1 {
-    margin: 0;
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    line-height: 1.12;
-    letter-spacing: -0.04em;
-  }
-
-  .hero-text > p {
-    max-width: 650px;
-    margin: 26px 0 32px;
-    color: rgba(255, 255, 255, 0.68);
-    font-size: 1.05rem;
-    line-height: 2;
-  }
-
-  .hero-buttons {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-
-  .hero-slider {
-    position: relative;
-    min-width: 0;
-  }
-
-  .slider-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 11;
-    min-height: 360px;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: 18px;
-    background: #080808;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-  }
-
-  .slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.025);
-    transition:
-      opacity 0.8s ease,
-      transform 1.2s ease,
-      visibility 0.8s ease;
-  }
-
-  .slide.active {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-    z-index: 1;
-  }
-
-  .slide::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.05),
-        rgba(0, 0, 0, 0.35)
-      );
-    pointer-events: none;
-  }
-
-  .slide img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .hero-slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-
-    background: rgba(0, 0, 0, 0.45);
-    color: #fff;
-
-    font-size: 28px;
-    line-height: 1;
-
-    cursor: pointer;
-    backdrop-filter: blur(8px);
-
-    transition:
-      background 0.25s ease,
-      border-color 0.25s ease,
-      transform 0.25s ease;
-  }
-
-  .hero-slider-arrow:hover {
-    background: rgba(255, 255, 255, 0.95);
-    color: #000;
-    border-color: #fff;
-  }
-
-  .hero-slider-arrow:active {
-    transform: translateY(-50%) scale(0.94);
-  }
-
-  .hero-slider-prev {
-    left: 18px;
-  }
-
-  .hero-slider-next {
-    right: 18px;
-  }
-
-  .slider-dots {
-    position: absolute;
-    left: 50%;
-    bottom: 18px;
-    transform: translateX(-50%);
-    z-index: 5;
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    cursor: pointer;
-
-    transition:
-      width 0.3s ease,
-      background 0.3s ease;
-  }
-
-  .dot.active {
-    width: 26px;
-    background: #fff;
-  }
-
-  @media (max-width: 900px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 45px;
-    }
-
-    .hero-text {
-      text-align: center;
-    }
-
-    .hero-text > p {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-buttons {
-      justify-content: center;
-    }
-
-    .slider-container {
-      min-height: 300px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-
-    .hero-text > p {
-      font-size: 0.95rem;
-      line-height: 1.9;
-    }
-
-    .slider-container {
-      min-height: 240px;
-      border-radius: 14px;
-    }
-
-    .hero-slider-arrow {
-      width: 34px;
-      height: 34px;
-      font-size: 22px;
-    }
-
-    .hero-slider-prev {
-      left: 10px;
-    }
-
-    .hero-slider-next {
-      right: 10px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .slide {
-      transition: none;
-    }
-  }
-</style>
