@@ -1,78 +1,59 @@
 ﻿---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Services from '../components/Services.astro';
-import Projects from '../components/Projects.astro';
-import Partners from '../components/Partners.astro';
-import WhyUs from '../components/WhyUs.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Services from '../../components/Services.astro';
+import Projects from '../../components/Projects.astro';
+import Partners from '../../components/Partners.astro';
+import WhyUs from '../../components/WhyUs.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
 ---
 
-<Layout lang="fa" title="نکس‌سیس پرشیا | راهکارهای یکپارچه فناوری" description="ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت سایبری، هوشمندسازی ساختمان، اتوماسیون صنعتی و هوش مصنوعی">
-  <Navbar lang="fa" />
+<Layout lang="en" title="Nexsys Persia | Integrated Technology Solutions" description="Provider of integrated IT, cybersecurity, smart building, industrial automation, and AI solutions.">
+  <Navbar lang="en" />
   <main>
-    <Hero lang="fa" />
-    <About lang="fa" />
-    <Services lang="fa" />
-    <Projects lang="fa" />
-    <Partners lang="fa" />
-    <WhyUs lang="fa" />
-    <Contact lang="fa" />
+    <Hero lang="en" />
+    <About lang="en" />
+    <Services lang="en" />
+    <Projects lang="en" />
+    <Partners lang="en" />
+    <WhyUs lang="en" />
+    <Contact lang="en" />
   </main>
-  <Footer lang="fa" />
+  <Footer lang="en" />
 </Layout>
 
 <script>
-  // Slider Logic for Projects
-  const projTrack = document.getElementById('proj-track');
-  const projSection = document.getElementById('projects');
-  if (projTrack && projSection) {
-    const pPrev = projSection.querySelector('.prev');
-    const pNext = projSection.querySelector('.next');
-    let pPos = 0;
-    const pItemW = 184; 
-    const pVis = Math.floor(projTrack.parentElement.offsetWidth / pItemW);
-    const pTotal = projTrack.children.length / 2;
-    pPos = -(pTotal * pItemW) + (pVis * pItemW);
-    projTrack.style.transform = 'translateX(' + pPos + 'px)';
+  function initSlider(trackId, sectionId, itemWidth) {
+    var track = document.getElementById(trackId);
+    var section = document.getElementById(sectionId);
+    if (!track || !section) return;
 
-    pNext.addEventListener('click', function() {
-      pPos -= pItemW;
-      if (pPos < -(pTotal * pItemW)) pPos = 0;
-      projTrack.style.transform = 'translateX(' + pPos + 'px)';
+    var prevBtn = section.querySelector('.prev');
+    var nextBtn = section.querySelector('.next');
+    
+    var pos = 0;
+    var visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+    var totalItems = track.children.length / 2;
+    
+    pos = -(totalItems * itemWidth) + (visibleItems * itemWidth);
+    track.style.transform = 'translateX(' + pos + 'px)';
+
+    nextBtn.addEventListener('click', function() {
+      pos -= itemWidth;
+      if (pos < -(totalItems * itemWidth)) pos = 0;
+      track.style.transform = 'translateX(' + pos + 'px)';
     });
-    pPrev.addEventListener('click', function() {
-      pPos += pItemW;
-      if (pPos > 0) pPos = -(pTotal * pItemW);
-      projTrack.style.transform = 'translateX(' + pPos + 'px)';
+
+    prevBtn.addEventListener('click', function() {
+      pos += itemWidth;
+      if (pos > 0) pos = -(totalItems * itemWidth);
+      track.style.transform = 'translateX(' + pos + 'px)';
     });
   }
 
-  // Slider Logic for Partners
-  const partTrack = document.getElementById('part-track');
-  const partSection = document.getElementById('partners');
-  if (partTrack && partSection) {
-    const ptPrev = partSection.querySelector('.prev');
-    const ptNext = partSection.querySelector('.next');
-    let ptPos = 0;
-    const ptItemW = 204; 
-    const ptVis = Math.floor(partTrack.parentElement.offsetWidth / ptItemW);
-    const ptTotal = partTrack.children.length / 2;
-    ptPos = -(ptTotal * ptItemW) + (ptVis * ptItemW);
-    partTrack.style.transform = 'translateX(' + ptPos + 'px)';
-
-    ptNext.addEventListener('click', function() {
-      ptPos -= ptItemW;
-      if (ptPos < -(ptTotal * ptItemW)) ptPos = 0;
-      partTrack.style.transform = 'translateX(' + ptPos + 'px)';
-    });
-    ptPrev.addEventListener('click', function() {
-      ptPos += ptItemW;
-      if (ptPos > 0) ptPos = -(ptTotal * ptItemW);
-      partTrack.style.transform = 'translateX(' + ptPos + 'px)';
-    });
-  }
+  initSlider('proj-track', 'projects', 184);
+  initSlider('part-track', 'partners', 204);
 </script>

@@ -3,30 +3,27 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
-const services = {
-  fa: [
-    { icon: 'server', title: 'زیرساخت و شبکه', desc: 'طراحی و پیاده‌سازی سرورها، شبکه‌های سازمانی، دیتاسنتر و زیرساخت‌های ابری.' },
-    { icon: 'shield', title: 'امنیت سایبری', desc: 'تست نفوذ، ارزیابی آسیب‌پذیری، امنیت شبکه و محافظت از داده‌های حیاتی سازمان.' },
-    { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'اتوماسیون خانگی و اداری، مدیریت انرژی، سیستم‌های کنترل دسترسی و نظارت تصویری.' },
-    { icon: 'cpu', title: 'اتوماسیون صنعتی', desc: 'کنترل فرآیندها، مانیتورینگ خطوط تولید، PLC و سیستم‌های اسکادا.' },
-    { icon: 'brain', title: 'هوش مصنوعی', desc: 'تحلیل داده، یادگیری ماشین، پردازش تصویر و پیاده‌سازی مدل‌های هوشمند.' },
-    { icon: 'network', title: 'زیرساخت ارتباطی و مخابرات', desc: 'طراحی و پیاده‌سازی VoIP، تلفن تحت شبکه، ارتباطات بین شعب، VPN، لینک‌های ارتباطی، رادیو وایرلس، فیبر نوری و زیرساخت‌های ارتباطی سازمانی.' }
-  ],
-  en: [
-    { icon: 'server', title: 'Infrastructure & Network', desc: 'Design and implementation of servers, enterprise networks, data centers, and cloud infrastructure.' },
-    { icon: 'shield', title: 'Cybersecurity', desc: 'Penetration testing, vulnerability assessment, network security, and critical data protection.' },
-    { icon: 'home', title: 'Smart Building', desc: 'Home and office automation, energy management, access control systems, and video surveillance.' },
-    { icon: 'cpu', title: 'Industrial Automation', desc: 'Process control, production line monitoring, PLC, and SCADA systems.' },
-    { icon: 'brain', title: 'Artificial Intelligence', desc: 'Data analysis, machine learning, image processing, and intelligent model implementation.' },
-    { icon: 'network', title: 'Communication Infrastructure', desc: 'Design and implementation of VoIP, IP telephony, branch connectivity, VPN, wireless links, fiber optics, and enterprise communication infrastructure.' }
-  ]
-}[isFa ? 'fa' : 'en'];
+const services = isFa ? [
+  { icon: 'server', title: 'زیرساخت و شبکه', desc: 'طراحی و پیاده‌سازی سرورها، شبکه‌های سازمانی و دیتاسنتر.' },
+  { icon: 'shield', title: 'امنیت سایبری', desc: 'تست نفوذ، ارزیابی آسیب‌پذیری و محافظت از داده‌های حیاتی.' },
+  { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'اتوماسیون خانگی و اداری، مدیریت انرژی و کنترل دسترسی.' },
+  { icon: 'cpu', title: 'اتوماسیون صنعتی', desc: 'کنترل فرآیندها، مانیتورینگ خطوط تولید و سیستم‌های اسکادا.' },
+  { icon: 'brain', title: 'هوش مصنوعی', desc: 'تحلیل داده، یادگیری ماشین و پردازش تصویر هوشمند.' },
+  { icon: 'network', title: 'زیرساخت ارتباطی', desc: 'VoIP، تلفن تحت شبکه، VPN، فیبر نوری و لینک‌های وایرلس.' }
+] : [
+  { icon: 'server', title: 'Infrastructure & Network', desc: 'Design of servers, enterprise networks, and data centers.' },
+  { icon: 'shield', title: 'Cybersecurity', desc: 'Penetration testing, vulnerability assessment, and data protection.' },
+  { icon: 'home', title: 'Smart Building', desc: 'Home automation, energy management, and access control.' },
+  { icon: 'cpu', title: 'Industrial Automation', desc: 'Process control, production monitoring, and SCADA systems.' },
+  { icon: 'brain', title: 'Artificial Intelligence', desc: 'Data analysis, machine learning, and image processing.' },
+  { icon: 'network', title: 'Communication Infra', desc: 'VoIP, IP telephony, VPN, fiber optics, and wireless links.' }
+];
 
 const icons = {
-  server: '<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
+  server: '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
   shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
   home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
-  cpu: '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
+  cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
   brain: '<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>',
   network: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
 };
@@ -38,7 +35,7 @@ const icons = {
       {isFa ? 'خدمات ' : 'Our '}<span class="gradient-text">{isFa ? 'ما' : 'Services'}</span>
     </h2>
     <p class="section-subtitle" style="text-align: center; margin: 0 auto 60px;">
-      {isFa ? 'راهکارهای جامع و تخصصی برای تحول دیجیتال کسب‌وکار شما' : 'Comprehensive and specialized solutions for your business digital transformation'}
+      {isFa ? 'راهکارهای جامع برای تحول دیجیتال کسب‌وکار شما' : 'Comprehensive solutions for your business digital transformation'}
     </p>
     
     <div class="services-grid">
