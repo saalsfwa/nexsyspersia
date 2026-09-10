@@ -37,17 +37,17 @@ import Footer from '../components/Footer.astro';
     const pVis = Math.floor(projTrack.parentElement.offsetWidth / pItemW);
     const pTotal = projTrack.children.length / 2;
     pPos = -(pTotal * pItemW) + (pVis * pItemW);
-    projTrack.style.transform = `translateX(${pPos}px)`;
+    projTrack.style.transform = 'translateX(' + pPos + 'px)';
 
-    pNext.addEventListener('click', () => {
+    pNext.addEventListener('click', function() {
       pPos -= pItemW;
       if (pPos < -(pTotal * pItemW)) pPos = 0;
-      projTrack.style.transform = `translateX(${pPos}px)`;
+      projTrack.style.transform = 'translateX(' + pPos + 'px)';
     });
-    pPrev.addEventListener('click', () => {
+    pPrev.addEventListener('click', function() {
       pPos += pItemW;
       if (pPos > 0) pPos = -(pTotal * pItemW);
-      projTrack.style.transform = `translateX(${pPos}px)`;
+      projTrack.style.transform = 'translateX(' + pPos + 'px)';
     });
   }
 
@@ -62,17 +62,17 @@ import Footer from '../components/Footer.astro';
     const ptVis = Math.floor(partTrack.parentElement.offsetWidth / ptItemW);
     const ptTotal = partTrack.children.length / 2;
     ptPos = -(ptTotal * ptItemW) + (ptVis * ptItemW);
-    partTrack.style.transform = `translateX(${ptPos}px)`;
+    partTrack.style.transform = 'translateX(' + ptPos + 'px)';
 
-    ptNext.addEventListener('click', () => {
+    ptNext.addEventListener('click', function() {
       ptPos -= ptItemW;
       if (ptPos < -(ptTotal * ptItemW)) ptPos = 0;
-      partTrack.style.transform = `translateX(${ptPos}px)`;
+      partTrack.style.transform = 'translateX(' + ptPos + 'px)';
     });
-    ptPrev.addEventListener('click', () => {
+    ptPrev.addEventListener('click', function() {
       ptPos += ptItemW;
       if (ptPos > 0) ptPos = -(ptTotal * ptItemW);
-      partTrack.style.transform = `translateX(${ptPos}px)`;
+      partTrack.style.transform = 'translateX(' + ptPos + 'px)';
     });
   }
 </script>
