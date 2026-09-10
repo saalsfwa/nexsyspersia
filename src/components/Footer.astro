@@ -1,25 +1,35 @@
-﻿<!-- v2-fix -->
----
+﻿---
 interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
+
+// تعریف کامل متغیر t برای جلوگیری از خطا
 const t = {
   fa: {
-    about: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت، هوشمندسازی و هوش مصنوعی برای سازمان‌های پیشرو.',
-    services: 'خدمات', company: 'شرکت', contact: 'تماس',
-    projects: 'نمونه‌کارها', partners: 'همراهان استراتژیک',
-    email: 'ایمیل', phone: 'تلفن',
+    about: 'ارائه‌دهنده‌ی راهکارهای یکپارچه فناوری اطلاعات، امنیت، هوشمندسازی و هوش مصنوعی.',
+    services: 'خدمات', 
+    company: 'شرکت', 
+    contact: 'تماس',
+    projects: 'نمونه‌کارها', 
+    partners: 'همراهان استراتژیک',
+    email: 'ایمیل', 
+    phone: 'تلفن',
     rights: '© ۲۰۲۶ نکس‌سیس پرشیا. تمامی حقوق محفوظ است.'
   },
   en: {
-    about: 'Provider of integrated IT, security, smart building, and AI solutions for forward-thinking organizations.',
-    services: 'Services', company: 'Company', contact: 'Contact',
-    projects: 'Projects', partners: 'Partners',
-    email: 'Email', phone: 'Phone',
+    about: 'Provider of integrated IT, security, smart building, and AI solutions.',
+    services: 'Services', 
+    company: 'Company', 
+    contact: 'Contact',
+    projects: 'Projects', 
+    partners: 'Partners',
+    email: 'Email', 
+    phone: 'Phone',
     rights: '© 2026 Nexsys Persia. All rights reserved.'
   }
 }[isFa ? 'fa' : 'en'];
 ---
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -27,6 +37,7 @@ const t = {
         <div class="logo" style="color: white;">NEXSYS<span>PERSIA</span></div>
         <p>{t.about}</p>
       </div>
+      
       <div>
         <h4>{t.services}</h4>
         <ul class="footer-links">
@@ -35,6 +46,7 @@ const t = {
           <li><a href="#services">Smart Building</a></li>
         </ul>
       </div>
+      
       <div>
         <h4>{t.company}</h4>
         <ul class="footer-links">
@@ -43,6 +55,7 @@ const t = {
           <li><a href="#about">About Us</a></li>
         </ul>
       </div>
+      
       <div>
         <h4>{t.contact}</h4>
         <ul class="footer-links">
@@ -51,6 +64,7 @@ const t = {
         </ul>
       </div>
     </div>
+    
     <div class="footer-bottom">{t.rights}</div>
   </div>
 </footer>

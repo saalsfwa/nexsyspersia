@@ -1,62 +1,295 @@
-﻿<!-- v2-fix -->
----
-interface Props { lang?: 'fa' | 'en'; }
+﻿---
+interface Props {
+  lang?: 'fa' | 'en';
+}
+
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
+
 const services = {
   fa: [
-    { icon: 'server', title: 'IT و زیرساخت دیجیتال', desc: 'طراحی شبکه، سرور، دیتاسنتر، Cloud، مجازی‌سازی و پشتیبانی زیرساخت‌های فناوری اطلاعات.' },
-    { icon: 'shield', title: 'امنیت سایبری', desc: 'Firewall، امنیت شبکه، EDR/XDR، SIEM، ارزیابی آسیب‌پذیری و محافظت کامل از دارایی‌های دیجیتال.' },
-    { icon: 'camera', title: 'نظارت تصویری و CCTV', desc: 'دوربین‌های IP، آنالیز ویدیویی مبتنی بر AI، پلاک‌خوان، تشخیص چهره و اتاق مانیتورینگ.' },
-    { icon: 'home', title: 'هوشمندسازی ساختمان', desc: 'Smart Home، BMS، کنترل روشنایی، HVAC، مدیریت انرژی و یکپارچه‌سازی سیستم‌ها.' },
-    { icon: 'factory', title: 'اتوماسیون صنعتی', desc: 'Industrial IT، شبکه‌ی صنعتی، SCADA، PLC، IIoT و امنیت شبکه‌های OT.' },
-    { icon: 'network', title: 'زیرساخت ارتباطی و مخابرات', desc: 'طراحی و پیاده‌سازی VoIP، تلفن تحت شبکه، ارتباطات بین شعب، VPN، لینک‌های ارتباطی، رادیو وایرلس، فیبر نوری و زیرساخت‌های ارتباطی سازمانی.' },
-    { icon: 'cpu', title: 'هوش مصنوعی و AI', desc: 'Video Analytics، Chatbot سازمانی، Predictive Maintenance و Computer Vision صنعتی.' },
-    { icon: 'code', title: 'توسعه نرم‌افزار', desc: 'طراحی وب‌سایت، Web App، اپلیکیشن موبایل، CRM/ERP و داشبوردهای BI.' },
-    { icon: 'fire', title: 'ایمنی و اعلام حریق', desc: 'سیستم‌های اعلام و اطفای حریق، PA، کنترل تردد و سیستم‌های حفاظتی.' }
+    {
+      icon: 'server',
+      title: 'IT و زیرساخت دیجیتال',
+      desc: 'طراحی شبکه، سرور، دیتاسنتر، Cloud، مجازی‌سازی و پشتیبانی زیرساخت‌های فناوری اطلاعات.'
+    },
+    {
+      icon: 'shield',
+      title: 'امنیت سایبری',
+      desc: 'Firewall، امنیت شبکه، EDR/XDR، SIEM، ارزیابی آسیب‌پذیری و محافظت از دارایی‌های دیجیتال.'
+    },
+    {
+      icon: 'camera',
+      title: 'نظارت تصویری و CCTV',
+      desc: 'دوربین‌های IP، آنالیز ویدیویی مبتنی بر AI، پلاک‌خوان، تشخیص چهره و اتاق مانیتورینگ.'
+    },
+    {
+      icon: 'home',
+      title: 'هوشمندسازی ساختمان',
+      desc: 'Smart Home، BMS، کنترل روشنایی، HVAC، مدیریت انرژی و یکپارچه‌سازی سیستم‌ها.'
+    },
+    {
+      icon: 'factory',
+      title: 'اتوماسیون صنعتی',
+      desc: 'Industrial IT، شبکه صنعتی، SCADA، PLC، IIoT و امنیت شبکه‌های OT.'
+    },
+    {
+      icon: 'network',
+      title: 'زیرساخت ارتباطی و مخابرات',
+      desc: 'طراحی و پیاده‌سازی VoIP، تلفن تحت شبکه، ارتباطات بین شعب، VPN، لینک‌های ارتباطی، رادیو وایرلس، فیبر نوری و زیرساخت‌های ارتباطی سازمانی.'
+    },
+    {
+      icon: 'cpu',
+      title: 'هوش مصنوعی و AI',
+      desc: 'Video Analytics، Chatbot سازمانی، Predictive Maintenance و Computer Vision صنعتی.'
+    },
+    {
+      icon: 'code',
+      title: 'توسعه نرم‌افزار',
+      desc: 'طراحی وب‌سایت، Web App، اپلیکیشن موبایل، CRM/ERP و داشبوردهای BI.'
+    },
+    {
+      icon: 'fire',
+      title: 'ایمنی و اعلام حریق',
+      desc: 'سیستم‌های اعلام و اطفای حریق، PA، کنترل تردد و سیستم‌های حفاظتی.'
+    }
   ],
+
   en: [
-    { icon: 'server', title: 'IT & Digital Infrastructure', desc: 'Network design, servers, data centers, Cloud, virtualization, and IT infrastructure support.' },
-    { icon: 'shield', title: 'Cybersecurity', desc: 'Firewall, network security, EDR/XDR, SIEM, vulnerability assessment, and full digital asset protection.' },
-    { icon: 'camera', title: 'Video Surveillance & CCTV', desc: 'IP cameras, AI-based video analytics, LPR, face recognition, and monitoring rooms.' },
-    { icon: 'home', title: 'Smart Building', desc: 'Smart Home, BMS, lighting control, HVAC, energy management, and system integration.' },
-    { icon: 'factory', title: 'Industrial Automation', desc: 'Industrial IT, industrial networking, SCADA, PLC, IIoT, and OT network security.' },
-    { icon: 'network', title: 'Communication Infrastructure', desc: 'Design and implementation of VoIP, IP telephony, branch connectivity, VPN, wireless links, fiber optics, and enterprise communication infrastructure.' },
-    { icon: 'cpu', title: 'Artificial Intelligence', desc: 'Video Analytics, enterprise Chatbot, Predictive Maintenance, and industrial Computer Vision.' },
-    { icon: 'code', title: 'Software Development', desc: 'Website design, Web Apps, mobile apps, CRM/ERP, and BI dashboards.' },
-    { icon: 'fire', title: 'Safety & Fire Alarm', desc: 'Fire alarm and suppression systems, PA, access control, and security systems.' }
+    {
+      icon: 'server',
+      title: 'IT & Digital Infrastructure',
+      desc: 'Network design, servers, data centers, Cloud, virtualization, and IT infrastructure support.'
+    },
+    {
+      icon: 'shield',
+      title: 'Cybersecurity',
+      desc: 'Firewall, network security, EDR/XDR, SIEM, vulnerability assessment, and digital asset protection.'
+    },
+    {
+      icon: 'camera',
+      title: 'Video Surveillance & CCTV',
+      desc: 'IP cameras, AI-based video analytics, LPR, face recognition, and monitoring rooms.'
+    },
+    {
+      icon: 'home',
+      title: 'Smart Building',
+      desc: 'Smart Home, BMS, lighting control, HVAC, energy management, and system integration.'
+    },
+    {
+      icon: 'factory',
+      title: 'Industrial Automation',
+      desc: 'Industrial IT, industrial networking, SCADA, PLC, IIoT, and OT network security.'
+    },
+    {
+      icon: 'network',
+      title: 'Communication Infrastructure',
+      desc: 'VoIP, IP telephony, branch connectivity, VPN, wireless links, fiber optics, and enterprise communication infrastructure.'
+    },
+    {
+      icon: 'cpu',
+      title: 'Artificial Intelligence',
+      desc: 'Video Analytics, enterprise Chatbot, Predictive Maintenance, and industrial Computer Vision.'
+    },
+    {
+      icon: 'code',
+      title: 'Software Development',
+      desc: 'Website design, Web Apps, mobile applications, CRM/ERP, and BI dashboards.'
+    },
+    {
+      icon: 'fire',
+      title: 'Safety & Fire Alarm',
+      desc: 'Fire alarm and suppression systems, PA, access control, and security systems.'
+    }
   ]
 }[isFa ? 'fa' : 'en'];
+
 const icons = {
-  server: '<rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><line x1="6" y1="6.5" x2="6.01" y2="6.5"/><line x1="6" y1="17.5" x2="6.01" y2="17.5"/>',
-  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-  camera: '<path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>',
-  home: '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
-  factory: '<path d="M2 20h20M4 20V8l6 4V8l6 4V4h4v16"/>',
-  network: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
-  cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>',
-  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
-  fire: '<path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/>'
+  server: `
+    <rect x="2" y="3" width="20" height="7" rx="2"/>
+    <rect x="2" y="14" width="20" height="7" rx="2"/>
+    <line x1="6" y1="6.5" x2="6.01" y2="6.5"/>
+    <line x1="6" y1="17.5" x2="6.01" y2="17.5"/>
+  `,
+
+  shield: `
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  `,
+
+  camera: `
+    <path d="M23 7l-7 5 7 5V7z"/>
+    <rect x="1" y="5" width="15" height="14" rx="2"/>
+  `,
+
+  home: `
+    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  `,
+
+  factory: `
+    <path d="M2 20h20M4 20V8l6 4V8l6 4V4h4v16"/>
+  `,
+
+  network: `
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="2" y1="12" x2="22" y2="12"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+  `,
+
+  cpu: `
+    <rect x="4" y="4" width="16" height="16" rx="2"/>
+    <rect x="9" y="9" width="6" height="6"/>
+    <line x1="9" y1="1" x2="9" y2="4"/>
+    <line x1="15" y1="1" x2="15" y2="4"/>
+    <line x1="9" y1="20" x2="9" y2="23"/>
+    <line x1="15" y1="20" x2="15" y2="23"/>
+  `,
+
+  code: `
+    <polyline points="16 18 22 12 16 6"/>
+    <polyline points="8 6 2 12 8 18"/>
+  `,
+
+  fire: `
+    <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/>
+  `
 };
 ---
-<section class="section" id="services">
+
+<section class="section services-section" id="services" dir={isFa ? 'rtl' : 'ltr'}>
   <div class="container">
+
     <h2 class="section-title">
-      {isFa ? 'خدمات ' : 'Our '}<span class="gradient-text">{isFa ? 'ما' : 'Services'}</span>
+      {isFa ? 'خدمات ' : 'Our '}
+      <span class="gradient-text">
+        {isFa ? 'ما' : 'Services'}
+      </span>
     </h2>
+
     <p class="section-subtitle">
-      {isFa ? 'راهکارهای جامع فناوری برای تمام نیازهای دیجیتال شما' : 'Comprehensive technology solutions for all your organization digital needs'}
+      {isFa
+        ? 'راهکارهای جامع فناوری برای تمام نیازهای دیجیتال سازمان شما'
+        : 'Comprehensive technology solutions for all your organization’s digital needs'}
     </p>
+
     <div class="services-grid">
-      {services.map(s => (
-        <div class="service-card">
+
+      {services.map((service) => (
+        <article class="service-card">
+
           <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons[s.icon]} />
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              set:html={icons[service.icon]}
+            />
           </div>
-          <h3>{s.title}</h3>
-          <p>{s.desc}</p>
-        </div>
+
+          <h3>{service.title}</h3>
+
+          <p>{service.desc}</p>
+
+        </article>
       ))}
+
     </div>
   </div>
 </section>
+
+<style>
+  .services-section {
+    position: relative;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 45px;
+  }
+
+  .service-card {
+    position: relative;
+    padding: 30px 26px;
+    min-height: 230px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.045),
+        rgba(255, 255, 255, 0.012)
+      );
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.28);
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.07),
+        rgba(255, 255, 255, 0.018)
+      );
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    color: #fff;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .service-card h3 {
+    margin: 0 0 12px;
+    font-size: 1.08rem;
+    line-height: 1.5;
+  }
+
+  .service-card p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 1000px) {
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 650px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-card {
+      min-height: auto;
+    }
+  }
+</style>
