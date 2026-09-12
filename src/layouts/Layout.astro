@@ -103,8 +103,8 @@ const { lang = 'fa', title, description } = Astro.props;
               var mdy = particles[a].y - mouse.y;
               var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
               if (mdist < mouse.radius) {
-                ctx.strokeStyle = 'rgba(' + particleColor + ',' + (0.35 * (1 - mdist / mouse.radius)) + ')';
-                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'rgba(239,68,68,' + (0.5 * (1 - mdist / mouse.radius)) + ')';
+                ctx.lineWidth = 1.2;
                 ctx.beginPath();
                 ctx.moveTo(particles[a].x, particles[a].y);
                 ctx.lineTo(mouse.x, mouse.y);
