@@ -1,19 +1,28 @@
 ﻿---
+import '../styles/global.css';
+import '../scripts/neural-network.js';
+
 interface Props {
   lang?: 'fa' | 'en';
   title: string;
   description: string;
 }
 const { lang = 'fa', title, description } = Astro.props;
-const dir = lang === 'fa' ? 'rtl' : 'ltr';
 ---
+
 <!doctype html>
-<html lang={lang} dir={dir}>
+<html lang={lang} dir={lang === 'fa' ? 'rtl' : 'ltr'}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        var t = 'light';
+        try { t = localStorage.getItem('nexsys-theme') || 'light'; } catch (e) {}
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
   <body>
@@ -21,157 +30,3 @@ const dir = lang === 'fa' ? 'rtl' : 'ltr';
     <slot />
   </body>
 </html>
-<style is:global>
-  @import '../styles/global.css';
-</style>
-<script is:inline>
-  class NeuralNetwork {
-    constructor() {
-      this.canvas = document.getElementById('neural-canvas');
-      if (!this.canvas) return;
-      
-      this.ctx = this.canvas.getContext('2d');
-      this.nodes = [];
-      this.scrollY = 0;
-      this.targetScrollY = 0;
-      this.mouseX = -1000;
-      this.mouseY = -1000;
-      
-      this.resize();
-      this.init();
-      this.animate();
-      
-      window.addEventListener('resize', () => this.resize());
-      window.addEventListener('scroll', () => {
-        this.targetScrollY = window.scrollY;
-      });
-      window.addEventListener('mousemove', (e) => {
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
-      });
-    }
-    
-    resize() {
-      this.canvas.width = window.innerWidth;
-      this.canvas.height = window.innerHeight;
-    }
-    
-    init() {
-      // تعداد بیشتر نودها برای ظاهر بهتر
-      const nodeCount = Math.floor((this.canvas.width * this.canvas.height) / 10000);
-      
-      for (let i = 0; i < nodeCount; i++) {
-        this.nodes.push({
-          x: Math.random() * this.canvas.width,
-          y: Math.random() * this.canvas.height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 2.5 + 1.5,
-          baseZ: Math.random() * 1000,
-          pulse: Math.random() * Math.PI * 2
-        });
-      }
-    }
-    
-    animate() {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      
-      this.scrollY += (this.targetScrollY - this.scrollY) * 0.05;
-      
-      const zoomFactor = 1 + (this.scrollY / 4000);
-      const time = Date.now() * 0.001;
-      
-      // به‌روزرسانی و رسم نودها
-      this.nodes.forEach(node => {
-        node.x += node.vx;
-        node.y += node.vy;
-        node.pulse += 0.02;
-        
-        if (node.x < 0) node.x = this.canvas.width;
-        if (node.x > this.canvas.width) node.x = 0;
-        if (node.y < 0) node.y = this.canvas.height;
-        if (node.y > this.canvas.height) node.y = 0;
-        
-        const currentZ = node.baseZ * zoomFactor;
-        const scale = 1000 / (1000 + currentZ);
-        const pulseScale = 1 + Math.sin(node.pulse) * 0.2;
-        
-        // رسم نود با درخشش
-        const glowRadius = node.radius * scale * pulseScale * 3;
-        const gradient = this.ctx.createRadialGradient(
-          node.x, node.y, 0,
-          node.x, node.y, glowRadius
-        );
-        gradient.addColorStop(0, `rgba(0, 212, 255, ${0.8 * scale})`);
-        gradient.addColorStop(0.5, `rgba(0, 212, 255, ${0.3 * scale})`);
-        gradient.addColorStop(1, 'rgba(0, 212, 255, 0)');
-        
-        this.ctx.beginPath();
-        this.ctx.arc(node.x, node.y, glowRadius, 0, Math.PI * 2);
-        this.ctx.fillStyle = gradient;
-        this.ctx.fill();
-        
-        // هسته نود
-        this.ctx.beginPath();
-        this.ctx.arc(node.x, node.y, node.radius * scale * pulseScale, 0, Math.PI * 2);
-        this.ctx.fillStyle = `rgba(255, 255, 255, ${0.9 * scale})`;
-        this.ctx.fill();
-      });
-      
-      // رسم خطوط بین نودها (فاصله بیشتر = خطوط بیشتر)
-      const connectionDistance = 180;
-      
-      this.nodes.forEach((node1, i) => {
-        this.nodes.slice(i + 1).forEach(node2 => {
-          const dx = node1.x - node2.x;
-          const dy = node1.y - node2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < connectionDistance) {
-            const avgZ = (node1.baseZ + node2.baseZ) / 2;
-            const scale = 1000 / (1000 + avgZ * zoomFactor);
-            const opacity = (1 - distance / connectionDistance) * 0.4 * scale;
-            
-            // گرادیانت برای خط
-            const lineGradient = this.ctx.createLinearGradient(
-              node1.x, node1.y, node2.x, node2.y
-            );
-            lineGradient.addColorStop(0, `rgba(0, 212, 255, ${opacity})`);
-            lineGradient.addColorStop(0.5, `rgba(124, 58, 237, ${opacity})`);
-            lineGradient.addColorStop(1, `rgba(0, 212, 255, ${opacity})`);
-            
-            this.ctx.beginPath();
-            this.ctx.moveTo(node1.x, node1.y);
-            this.ctx.lineTo(node2.x, node2.y);
-            this.ctx.strokeStyle = lineGradient;
-            this.ctx.lineWidth = 1.2 * scale;
-            this.ctx.stroke();
-          }
-        });
-        
-        // اتصال به موس
-        const dxMouse = node1.x - this.mouseX;
-        const dyMouse = node1.y - this.mouseY;
-        const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-        
-        if (distMouse < 200) {
-          const opacity = (1 - distMouse / 200) * 0.6;
-          this.ctx.beginPath();
-          this.ctx.moveTo(node1.x, node1.y);
-          this.ctx.lineTo(this.mouseX, this.mouseY);
-          this.ctx.strokeStyle = `rgba(255, 0, 110, ${opacity})`;
-          this.ctx.lineWidth = 1.5;
-          this.ctx.stroke();
-        }
-      });
-      
-      requestAnimationFrame(() => this.animate());
-    }
-  }
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => new NeuralNetwork());
-  } else {
-    new NeuralNetwork();
-  }
-</script>
