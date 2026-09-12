@@ -15,19 +15,29 @@ const partners = [
   'Amazon Alexa', 'Apple Home', 'Samsung SmartThings', 'Philips Hue'
 ];
 
+// شناسه‌های اصلاح‌شده برای برندهای خاص
 const getLogoUrl = (name: string) => {
   const map: Record<string, string> = {
-    'Hewlett Packard Enterprise': 'hpe', 'Palo Alto Networks': 'paloaltonetworks',
-    'Check Point Software Technologies': 'checkpoint', 'Google DeepMind': 'google',
-    'Hanwha Vision': 'hanwha', 'Axis Communications': 'axis',
-    'Johnson Controls': 'johnsoncontrols', 'Rockwell Automation': 'rockwellautomation',
-    'Juniper Networks': 'junipernetworks', 'Google Home': 'googlehome',
-    'Amazon Alexa': 'amazonalexa', 'Apple Home': 'apple',
-    'Samsung SmartThings': 'smartthings', 'Philips Hue': 'philipshue',
+    'Hewlett Packard Enterprise': 'hpe',
+    'Dell Technologies': 'dell',
+    'Palo Alto Networks': 'paloaltonetworks',
+    'Check Point Software Technologies': 'checkpoint',
+    'Google DeepMind': 'deepmind',
+    'Hanwha Vision': 'hanwhavision',
+    'Axis Communications': 'axis',
+    'Dahua Technology': 'dahua',
+    'Johnson Controls': 'johnsoncontrols',
+    'Rockwell Automation': 'rockwellautomation',
+    'Juniper Networks': 'junipernetworks',
+    'Google Home': 'googlehome',
+    'Amazon Alexa': 'amazonalexa',
+    'Apple Home': 'apple',
+    'Samsung SmartThings': 'smartthings',
+    'Philips Hue': 'philipshue',
     'Schneider Electric': 'schneiderelectric'
   };
   const slug = map[name] || name.toLowerCase().replace(/\s+/g, '');
-  return `https://cdn.simpleicons.org/${slug}/FFFFFF`;
+  return `https://cdn.simpleicons.org/${slug}`;
 };
 ---
 
@@ -43,7 +53,13 @@ const getLogoUrl = (name: string) => {
     <div class="partners-grid" id="part-grid">
       {partners.map(name => (
         <div class="partner-item">
-          <img src={getLogoUrl(name)} alt={name} loading="lazy" />
+          <img 
+            src={getLogoUrl(name)} 
+            alt={name} 
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          />
+          <span class="brand-fallback">{name}</span>
         </div>
       ))}
     </div>
@@ -68,11 +84,34 @@ const getLogoUrl = (name: string) => {
     background: var(--soft-bg);
     border: 1px solid var(--color-border);
     border-radius: 8px;
+    position: relative;
   }
   .partner-item:nth-child(-n+7) { display: flex; }
   
-  .partner-item img { max-width: 100%; max-height: 100%; object-fit: contain; filter: var(--logo-filter); transition: filter 0.3s; }
+  .partner-item img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+    filter: var(--logo-filter); 
+    transition: filter 0.3s; 
+  }
   .partner-item:hover img { filter: var(--logo-filter-hover); }
+  
+  /* استایل زیبا برای متن جایگزین لوگو */
+  .brand-fallback {
+    display: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: var(--color-text);
+    line-height: 1.2;
+    padding: 4px;
+    text-transform: uppercase;
+  }
+  .brand-fallback:hover {
+    color: var(--color-accent);
+  }
   
   @media (max-width: 1024px) { .partners-grid { grid-template-columns: repeat(5, 1fr); } }
   @media (max-width: 768px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
