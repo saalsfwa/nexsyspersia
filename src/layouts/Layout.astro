@@ -27,8 +27,6 @@ const { lang = 'fa', title, description } = Astro.props;
   <body>
     <canvas id="neural-canvas"></canvas>
     <slot />
-    <script>
-      import '../scripts/neural-network.js';
-    </script>
+    <script is:inline src="/scripts/neural-network.js"></script>
   </body>
 </html>
