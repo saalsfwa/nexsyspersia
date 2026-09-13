@@ -3,18 +3,26 @@ interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
 
-const links = isFa ? [
-  { href: '#about', label: 'درباره ما' },
-  { href: '#services', label: 'خدمات' },
-  { href: '#projects', label: 'پروژه ها' },
-  { href: '#partners', label: 'همراهان' },
-  { href: '#contact', label: 'تماس با ما' }
+const services = isFa ? [
+  'IT و زیرساخت دیجیتال',
+  'امنیت سایبری',
+  'نظارت تصویری و CCTV',
+  'هوشمندسازی ساختمان',
+  'اتوماسیون صنعتی',
+  'هوش مصنوعی و AI',
+  'توسعه نرم‌افزار',
+  'ایمنی و اعلام حریق',
+  'زیرساخت ارتباطی و مخابرات'
 ] : [
-  { href: '#about', label: 'About Us' },
-  { href: '#services', label: 'Services' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#partners', label: 'Partners' },
-  { href: '#contact', label: 'Contact Us' }
+  'Digital Infrastructure & IT',
+  'Cybersecurity',
+  'Video Surveillance & CCTV',
+  'Smart Building',
+  'Industrial Automation',
+  'Artificial Intelligence & AI',
+  'Software Development',
+  'Safety & Fire Alarm',
+  'Communication Infrastructure'
 ];
 ---
 
@@ -23,9 +31,24 @@ const links = isFa ? [
     <a href={isFa ? '/' : '/en/'} class="logo">NEXSYS<span>PERSIA</span></a>
     
     <ul class="nav-links" id="nav-links">
-      {links.map((link) => (
-        <li><a href={link.href}>{link.label}</a></li>
-      ))}
+      <li><a href="#about">{isFa ? 'درباره ما' : 'About Us'}</a></li>
+      
+      <li class="has-dropdown">
+        <a href="#services" class="dropdown-trigger">
+          {isFa ? 'خدمات' : 'Services'}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="dropdown">
+          {services.map((s) => (
+            <a class="dropdown-item" href="#services">{s}</a>
+          ))}
+        </div>
+      </li>
+      
+      <li><a href="#projects">{isFa ? 'نمونه‌کارها' : 'Projects'}</a></li>
+      <li><a href="#partners">{isFa ? 'همراهان' : 'Partners'}</a></li>
+      <li><a href="#contact">{isFa ? 'تماس با ما' : 'Contact Us'}</a></li>
+      
       <li>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
           <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -40,6 +63,81 @@ const links = isFa ? [
     </button>
   </div>
 </nav>
+
+<style>
+  .has-dropdown { position: relative; }
+  .dropdown-trigger { display: inline-flex; align-items: center; gap: 6px; }
+  .dropdown-trigger svg { transition: transform 0.3s ease; }
+  .has-dropdown:hover .dropdown-trigger svg,
+  .has-dropdown:focus-within .dropdown-trigger svg { transform: rotate(180deg); }
+
+  /* پل نامرئی بین لینک و منو تا با حرکت موس منو بسته نشود */
+  .has-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 16px;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    inset-inline-start: 0;
+    min-width: 250px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 120;
+  }
+  .has-dropdown:hover .dropdown,
+  .has-dropdown:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-item {
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .dropdown-item::after { content: none; }
+  .dropdown-item:hover {
+    background: var(--soft-bg);
+    color: var(--color-text);
+  }
+
+  /* در موبایل: زیرمنو داخل منوی بازشده به صورت لیست ساده نمایش داده می‌شود */
+  @media (max-width: 900px) {
+    .dropdown {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      padding: 0;
+      min-width: 0;
+    }
+    .has-dropdown::after { display: none; }
+    .dropdown-item { padding: 6px 12px; white-space: normal; }
+  }
+</style>
 
 <script>
   var toggle = document.getElementById('mobile-toggle');
