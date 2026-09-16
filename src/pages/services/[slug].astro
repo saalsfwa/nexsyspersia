@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { services } from '../../data/services.js';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<Layout lang="fa" title={`${service.title} | نکس‌سیس پرشیا`} description={service.intro}>
+  <Navbar lang="fa" />
+  <main class="service-page">
+    <section class="service-hero">
+      <div class="container">
+        <a href="/#services" class="back-link">بازگشت به خدمات</a>
+        <h1>{service.title}</h1>
+        <p>{service.intro}</p>
+        <a href="/#contact" class="btn btn-primary">درخواست مشاوره</a>
+      </div>
+    </section>
+    <section class="service-items">
+      <div class="container">
+        <ul class="items-grid">
+          {service.items.map((item) => (
+            <li class="item-chip">{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer lang="fa" />
+</Layout>
+
+<style>
+  .service-page { padding-top: 120px; position: relative; z-index: 1; }
+  .service-hero { padding: 40px 0 60px; }
+  .back-link { display: inline-block; margin-bottom: 24px; color: var(--color-muted); font-size: 0.9rem; transition: var(--transition); }
+  .back-link:hover { color: var(--color-text); }
+  .service-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .service-hero p { color: var(--color-muted); font-size: 1.1rem; max-width: 700px; margin-bottom: 36px; line-height: 1.8; }
+  .service-items { padding-bottom: 100px; }
+  .items-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .item-chip { padding: 16px 18px; background: var(--color-card); border: 1px solid var(--color-border); border-radius: 10px; color: var(--color-text); font-size: 0.92rem; line-height: 1.6; display: flex; align-items: center; gap: 10px; transition: var(--transition); }
+  .item-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; }
+  .item-chip:hover { border-color: var(--color-accent); background: var(--card-hover); transform: translateY(-2px); }
+</style>

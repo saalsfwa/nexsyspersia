@@ -2,52 +2,53 @@
 interface Props { lang?: 'fa' | 'en'; }
 const { lang = 'fa' } = Astro.props;
 const isFa = lang === 'fa';
+const base = isFa ? '/' : '/en/';
 
 const services = isFa ? [
-  'IT و زیرساخت دیجیتال',
-  'امنیت سایبری',
-  'نظارت تصویری و CCTV',
-  'هوشمندسازی ساختمان',
-  'اتوماسیون صنعتی',
-  'هوش مصنوعی و AI',
-  'توسعه نرم‌افزار',
-  'ایمنی و اعلام حریق',
-  'زیرساخت ارتباطی و مخابرات'
+  { label: 'IT و زیرساخت دیجیتال', href: '/services/it-infrastructure' },
+  { label: 'امنیت سایبری', href: '/services/cybersecurity' },
+  { label: 'نظارت تصویری و CCTV', href: '/services/cctv' },
+  { label: 'هوشمندسازی ساختمان', href: '/services/smart-building' },
+  { label: 'اتوماسیون صنعتی', href: '/services/industrial-automation' },
+  { label: 'هوش مصنوعی و AI', href: '/services/ai' },
+  { label: 'توسعه نرم‌افزار', href: '/services/software-development' },
+  { label: 'ایمنی و اعلام حریق', href: '/services/safety-fire' },
+  { label: 'زیرساخت ارتباطی و مخابرات', href: '/services/communication-infrastructure' }
 ] : [
-  'Digital Infrastructure & IT',
-  'Cybersecurity',
-  'Video Surveillance & CCTV',
-  'Smart Building',
-  'Industrial Automation',
-  'Artificial Intelligence & AI',
-  'Software Development',
-  'Safety & Fire Alarm',
-  'Communication Infrastructure'
+  { label: 'Digital Infrastructure & IT', href: '/en/#services' },
+  { label: 'Cybersecurity', href: '/en/#services' },
+  { label: 'Video Surveillance & CCTV', href: '/en/#services' },
+  { label: 'Smart Building', href: '/en/#services' },
+  { label: 'Industrial Automation', href: '/en/#services' },
+  { label: 'Artificial Intelligence & AI', href: '/en/#services' },
+  { label: 'Software Development', href: '/en/#services' },
+  { label: 'Safety & Fire Alarm', href: '/en/#services' },
+  { label: 'Communication Infrastructure', href: '/en/#services' }
 ];
 ---
 
 <nav class="navbar">
   <div class="nav-inner">
-    <a href={isFa ? '/' : '/en/'} class="logo">NEXSYS<span>PERSIA</span></a>
+    <a href={base} class="logo">NEXSYS<span>PERSIA</span></a>
     
     <ul class="nav-links" id="nav-links">
-      <li><a href="#about">{isFa ? 'درباره ما' : 'About Us'}</a></li>
+      <li><a href={`${base}#about`}>{isFa ? 'درباره ما' : 'About Us'}</a></li>
       
       <li class="has-dropdown">
-        <a href="#services" class="dropdown-trigger">
+        <a href={`${base}#services`} class="dropdown-trigger">
           {isFa ? 'خدمات' : 'Services'}
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
         <div class="dropdown">
           {services.map((s) => (
-            <a class="dropdown-item" href="#services">{s}</a>
+            <a class="dropdown-item" href={s.href}>{s.label}</a>
           ))}
         </div>
       </li>
       
-      <li><a href="#projects">{isFa ? 'پروژه ها' : 'Projects'}</a></li>
-      <li><a href="#partners">{isFa ? 'همراهان' : 'Partners'}</a></li>
-      <li><a href="#contact">{isFa ? 'تماس با ما' : 'Contact Us'}</a></li>
+      <li><a href={`${base}#projects`}>{isFa ? 'نمونه‌کارها' : 'Projects'}</a></li>
+      <li><a href={`${base}#partners`}>{isFa ? 'همراهان' : 'Partners'}</a></li>
+      <li><a href={`${base}#contact`}>{isFa ? 'تماس با ما' : 'Contact Us'}</a></li>
       
       <li>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -71,7 +72,6 @@ const services = isFa ? [
   .has-dropdown:hover .dropdown-trigger svg,
   .has-dropdown:focus-within .dropdown-trigger svg { transform: rotate(180deg); }
 
-  /* پل نامرئی بین لینک و منو تا با حرکت موس منو بسته نشود */
   .has-dropdown::after {
     content: '';
     position: absolute;
@@ -121,7 +121,6 @@ const services = isFa ? [
     color: var(--color-text);
   }
 
-  /* در موبایل: زیرمنو داخل منوی بازشده به صورت لیست ساده نمایش داده می‌شود */
   @media (max-width: 900px) {
     .dropdown {
       position: static;
