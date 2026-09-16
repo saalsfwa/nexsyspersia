@@ -1,8 +1,8 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
-import { services } from '../../data/services.js';
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import { services } from '../../../data/services.js';
 
 export function getStaticPaths() {
   return services.map((service) => ({
@@ -12,18 +12,18 @@ export function getStaticPaths() {
 }
 
 const { service } = Astro.props;
-const data = service.fa;
+const data = service.en;
 ---
 
-<Layout lang="fa" title={`${data.title} | نکس‌سیس پرشیا`} description={data.intro}>
-  <Navbar lang="fa" />
+<Layout lang="en" title={`${data.title} | Nexsys Persia`} description={data.intro}>
+  <Navbar lang="en" />
   <main class="service-page">
     <section class="service-hero">
       <div class="container">
-        <a href="/#services" class="back-link">بازگشت به خدمات</a>
+        <a href="/en/#services" class="back-link">Back to Services</a>
         <h1>{data.title}</h1>
         <p>{data.intro}</p>
-        <a href="/#contact" class="btn btn-primary">درخواست مشاوره</a>
+        <a href="/en/#contact" class="btn btn-primary">Get Consultation</a>
       </div>
     </section>
     <section class="service-items">
@@ -36,7 +36,7 @@ const data = service.fa;
       </div>
     </section>
   </main>
-  <Footer lang="fa" />
+  <Footer lang="en" />
 </Layout>
 
 <style>
